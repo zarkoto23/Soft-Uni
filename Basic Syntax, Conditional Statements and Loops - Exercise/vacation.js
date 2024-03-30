@@ -62,3 +62,4 @@ function asd(count, type, day) {
   console.log(`Total price: ${(price * count).toFixed(2)}`);
 }
 asd(40, "Regular", "Saturday");
+
