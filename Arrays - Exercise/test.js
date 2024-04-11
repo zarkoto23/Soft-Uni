@@ -1,13 +1,8 @@
-function magic(a,b) {
-    for (let i = 0; i < a.length; i++) {
-        for (let j = i + 1; j < a.length; j++){
-            if (Number(a[i]) + Number(a[j]) === Number(b)){
-                console.log(a[i] + ` ` + a[j]);     
-            }
-        }
-    }
-}
-  magic([1, 7, 6, 2, 19, 23],
-    8
-    
-  )    
+let health=80
+let num=30
+
+if (health + num > 100) {
+    num = 100 - health;
+    health = 100;
+  } 
+  console.log(num)
