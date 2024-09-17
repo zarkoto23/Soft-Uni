@@ -13,7 +13,7 @@ function sorting(arr) {
     }
   }
 
-  console.log(result);
+  console.log(result.join(' '));
 }
 
 sorting([34, 2, 32, 45, 690, 6, 32, 7, 19, 47]);
