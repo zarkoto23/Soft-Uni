@@ -1,20 +1,25 @@
 function bomb(arr, bombNums) {
-  let [specNum, range] = [bombNums[0], bombNums[1]];
+  let [specNum, range] = bombNums;
 
-  while (arr.indexOf(specNum) !== -1) {
-    arr.splice(arr.indexOf(specNum) - range, arr.indexOf(specNum) + range-1);
+  while (arr.includes(specNum)) {
+    let index = arr.indexOf(specNum);
+    let start = Math.max(index - range, 0);
+    let deleteCount = range * 2 + 1; 
+
+    arr.splice(start, deleteCount);
   }
-  let result = 0;
 
-  for (num of arr) {
-    result += num;
+  let result = 0
+  for (num of arr){
+    result+=num
   }
 
   console.log(result);
 }
-
-bomb([1, 2, 2, 4, 2, 2, 2, 9],
-  [4, 2]
+bomb([1, 4, 4, 2, 8, 9, 1],
+  [9, 3]
+  
+  
   
   
   );
