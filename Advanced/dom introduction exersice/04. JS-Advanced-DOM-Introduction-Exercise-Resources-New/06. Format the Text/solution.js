@@ -1,22 +1,27 @@
 function solve() {
   const inputEl = document.querySelector("#input");
-  const outputEl = document.querySelector("#output");
-  const buttonEl = document.querySelector("#formatBtn"); //
+  const output = document.querySelector("#output");
+  const buttonEl = document.querySelector("#formatBtn");
+  let result = "";
 
-  if (inputEl.value == "") {
-    return;
+  const outputResult = [];
+  output.innerHTML = "";
+  if (inputEl.value == "") return;
+
+  const sentences = inputEl.value.split(".").map(s=>s.trim())
+  .filter(s=>s.length>0)
+  console.log(sentences)
+
+  for (let i = 0; i < sentences.length; i += 3) {
+    result += sentences[i] + ".";
+    if (sentences[i + 1]) {
+      result += sentences[i + 1] + ".";
+    }
+    if (sentences[i + 2]) {
+      result += sentences[i + 2] + ".";
+    }
+    outputResult.push(`<p>${result}</p>`);
+    result = "";
   }
-
-  const sentencesPerParagraph = 3;
-  const sentences = inputEl.value.split(". ");
-  const numberOfParagraph = Math.ceil(sentences.length / sentencesPerParagraph);
-
-  let output = "";
-  for (let i = 0; i < numberOfParagraph; i++) {
-    const p = i * numberOfParagraph;
-    const text = sentences.slice(p, p + sentencesPerParagraph).join(". ");
-    output += `<p>${text}</p>`;
-  }
-
-  outputEl.innerHTML = output;
+  output.innerHTML = outputResult.join('');
 }
