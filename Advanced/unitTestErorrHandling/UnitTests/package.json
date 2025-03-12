@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "D:/SoftUni/SoftUniRepo/Advanced/unitTestErorrHandling/sumOfNumbers/node_modules/.bin/mocha"
+    "test": "D:/SoftUni/SoftUniRepo/Advanced/unitTestErorrHandling/unitTests/node_modules/.bin/mocha"
   },
   "keywords": [],
   "author": "",
