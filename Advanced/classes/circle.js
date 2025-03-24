@@ -1,40 +1,29 @@
-class Circle {
-  _radius;
+class Circle{
 
-  get radius() {
-    return this._radius;
+  constructor(radius){
+    this._radius=radius
   }
-  set radius(value) {
-    if (value <= 0) {
-      throw new RangeError("radius cant be negative");
-    }
-    if (typeof value != "number") {
-      throw new TypeError("diameter must be number");
-    }
-    this._radius = value;
+  get r(){
+    return this._radius
   }
-
-  get diameter() {
-    return this.radius * 2;
+  set r(value){
+    if(value<0){
+      throw new RangeError('Radius must be positive number')
+    }if(!typeof(value)!='number')
+      throw new TypeError('Radius must be a type Number')
   }
-
-  set diameter(value) {
-    this.radius = value / 2;
+  get d(){
+    return this._radius*2
   }
-  get area() {
-    return Math.PI * this.radius ** 2;
+  set d(value){
+    this._radius=value/2
   }
 
-  constructor(radius) {
-    this.radius = radius;
+  get area(){
+    return Math.PI * this._radius ** 2;
   }
 }
-
-let c = new Circle(2);
-console.log(`Radius: ${c.radius}`);
-console.log(`Diameter: ${c.diameter}`);
-console.log(`Area: ${c.area}`);
-c.diameter = 1.6;
-console.log(`Radius: ${c.radius}`);
-console.log(`Diameter: ${c.diameter}`);
-console.log(`Area: ${c.area}`);
+const myCircle=new Circle(2)
+console.log(myCircle.r)
+console.log(myCircle.d)
+console.log(myCircle.area)
