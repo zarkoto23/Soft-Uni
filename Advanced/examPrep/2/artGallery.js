@@ -52,3 +52,5 @@ const artGallery = {
     }
   },
 };
+
+export {artGallery}
