@@ -1,0 +1,22 @@
+{
+  "exercises": [
+    {
+      "id": "push_up",
+      "title": "Push-Up",
+      "type": "Strength",
+      "difficulty": "Medium"
+    },
+    {
+      "id": "squat",
+      "title": "Squat",
+      "type": "Strength",
+      "difficulty": "Easy"
+    },
+    {
+      "id": "plank",
+      "title": "Plank",
+      "type": "Core",
+      "difficulty": "Hard"
+    }
+  ]
+}
