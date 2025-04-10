@@ -18,11 +18,17 @@ async function getInfo() {
 
       }
       const data=await res.json()
-      
+      stopNameElement.textContent=data.name
+      Object.entries(data.buses).forEach(b=>{
+        const li=document.createElement('li')
+        li.textContent=`Bus ${b[0]} arrives in ${b[1]} minutes`
+        timeTableElement.appendChild(li)
 
+      })
+        submitBtn.disabled=false
       
-    } catch (error) {
-      
+    } catch(error){
+      stopNameElement.textContent='Error'
     }
 
 
