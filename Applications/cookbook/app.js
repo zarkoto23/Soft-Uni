@@ -2,9 +2,19 @@ const recepiesUrl = "http://localhost:3030/jsonstore/cookbook/recipes";
 const mainEl = document.querySelector("body > main");
 
 function initNavigation(){
- const guestNavigation=document.getElementById('guest')
- guestNavigation.style.display='block'
 
+
+ const email=localStorage.getItem('email')
+ if(email&&email!=='undefined'){
+ const userNavigation=document.getElementById('user')
+userNavigation.style.display='block'
+
+  
+ }else{
+ const guestNavigation=document.getElementById('guest')
+
+ guestNavigation.style.display='block'
+ }
 }
 
 function loadRecepies() {

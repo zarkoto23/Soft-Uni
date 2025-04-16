@@ -23,5 +23,7 @@ registerForm.addEventListener("submit", (e) => {
   .then(data=>{
     localStorage.setItem('accessToken',data.accessToken)
     localStorage.setItem('email', data.email)
+
+    location.href='/'
   })
 });
