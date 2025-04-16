@@ -1,7 +1,7 @@
 const recepiesUrl = "http://localhost:3030/jsonstore/cookbook/recipes";
+const mainEl = document.querySelector("body > main");
 
 function loadRecepies() {
-  const mainEl = document.querySelector("body > main");
   fetch(recepiesUrl)
     .then((res) => res.json())
     .then((data) => {
@@ -31,16 +31,41 @@ function renderArticle(article) {
   articleEl.appendChild(titleDiv);
   articleEl.appendChild(smallDiv);
 
+  articleEl.addEventListener("click", async (e) => {
+    const response = await fetch(
+      `http://localhost:3030/jsonstore/cookbook/details/${article._id}`
+    );
+    const articleDetailes = await response.json();
+    const articleDetailsElement = renderDetaledArticle(articleDetailes);
+    mainEl.innerHTML = "";
+    mainEl.appendChild(articleDetailsElement);
+  });
+
+  return articleEl;
+}
+
+function renderDetaledArticle(article) {
+  const articleEl = document.createElement("article");
+  articleEl.innerHTML = `
+            <h2>${article.name}</h2>
+            <div class="band">
+                <div class="thumb">
+                    <img src=${article.img}>
+                </div>
+                <div class="ingredients">
+                    <h3>Ingredients:</h3>
+                    <ul>
+                        ${article.ingredients
+                          .map((i) => `<li>${i}</li>`)
+                          .join("\n")}
+                    </ul>
+                </div>
+            </div>
+            <div class="description">
+                <h3>Preparation:</h3>
+                ${article.steps.map((step) => `<p>${step}</p>`).join("\n")}
+            </div>`;
   return articleEl;
 }
 
 loadRecepies();
-
-// <article class="preview">
-//             <div class="title">
-//                 <h2>Title</h2>
-//             </div>
-//             <div class="small">
-//                 <img src="assets/lasagna.jpg">
-//             </div>
-//         </article>
