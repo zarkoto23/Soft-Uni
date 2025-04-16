@@ -1,4 +1,4 @@
-const recepiesUrl = "http://localhost:3030/jsonstore/cookbook/recipes";
+const recepiesUrl = "http://localhost:3030/data/recipes";
 const mainEl = document.querySelector("body > main");
 
 function initNavigation(){
@@ -48,9 +48,7 @@ function renderArticle(article) {
   articleEl.appendChild(smallDiv);
 
   articleEl.addEventListener("click", async (e) => {
-    const response = await fetch(
-      `http://localhost:3030/jsonstore/cookbook/details/${article._id}`
-    );
+    const response = await fetch(`${baseUrl}/${article._id}`);
     const articleDetailes = await response.json();
     const articleDetailsElement = renderDetaledArticle(articleDetailes);
     mainEl.innerHTML = "";
