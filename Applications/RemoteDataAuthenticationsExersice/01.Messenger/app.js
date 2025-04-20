@@ -16,6 +16,7 @@ async function postMessages() {
     await request(url, { author: author.value, content: content.value });
   }
   author.value = "";
+
   content.value = "";
 }
 
@@ -41,5 +42,5 @@ async function request(url, option) {
 
   return response.json();
 }
-
+//sada
 attachEvents();
