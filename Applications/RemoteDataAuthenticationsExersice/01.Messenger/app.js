@@ -42,5 +42,5 @@ async function request(url, option) {
 
   return response.json();
 }
-//sada
+
 attachEvents();
