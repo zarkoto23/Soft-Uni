@@ -6,8 +6,8 @@ export function showCatalogView() {
     .forEach((s) => (s.style.display = "none"));
   document.getElementById("catalog").style.display = "block";
 
-  const list=document.getElementById('parts')
-  list.innerHTML='loading---'
+  const list = document.getElementById("parts");
+  list.innerHTML = "loading---";
   loadParts();
 }
 
