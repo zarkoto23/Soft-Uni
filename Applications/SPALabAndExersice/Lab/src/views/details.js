@@ -4,6 +4,11 @@ export function showDetailsView(partId) {
     .forEach((s) => (s.style.display = "none"));
   document.getElementById("details").style.display = "block";
 
+  document.querySelector('#details h2').innerHTML='loading........'
+  document.querySelector('#details .subtitle').innerHTML='laoloading/>/>/>'
+  document.querySelector('#details .description').innerHTML='loadinG'
+
+
   loadDetails(partId);
 }
 
