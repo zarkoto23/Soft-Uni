@@ -10,11 +10,24 @@ async function onLogin(event) {
   const email=formData.get('email')
   const password=formData.get('password')
 
-  const response=await fetch('hhtp://localhost:3030/users/login')
+  const response=await fetch('http://localhost:3030/users/login', {
+    method:'post',
+    headers:{
+      'Content-Type':'application/json'
+    },
+    body:JSON.stringify({
+      email,
+      password
+    })
+  })
   if (!response.ok) {
     const error=await response.json()
     return alert('error loging in:\n'+error.message)
    }
+
+   const result=await response.json()
+  localStorage.setItem('accessToken',result.accessToken)
+
 
 }
 
@@ -52,20 +65,24 @@ async function onRegister(event) {
   }
 
   const result = await response.json();
-  console.log(result);
+  localStorage.setItem('accessToken',result.accessToken)
 }
 
-const token =
-  "5b64e54db1486fe8c80c671126868f0039aab20aafd4b8a362233338abd5feed";
 
-async function makeRequest() {
-  const response = await fetch("http://localhost:3030/jsonstore/phonebook", {
+async function makeRequest(event) {
+
+  const options= {
     method: "get",
-    headers: {
-      "X-Authorization": token,
-    },
-    body:JSON.stringify()
-  });
+    headers:{},
+    
+  }
+
+  const accessToken=localStorage.getItem('accessToken')
+  if(accessToken){
+    options.headers['X-Authorization']=accessToken
+  }
+
+  const response = await fetch("http://localhost:3030/jsonstore/phonebook", options);
 
   if (!response.ok) {
    const error=await response.json()
