@@ -1,11 +1,7 @@
-import { showDetailsView } from "./details.js";
+import { startDetails } from "./details.js";
+import { showView } from "./nav.js";
 
-export function showCatalogView() {
-  document
-    .querySelectorAll("section")
-    .forEach((s) => (s.style.display = "none"));
-  document.getElementById("catalog").style.display = "block";
-
+export function startCatalog() {
   const list = document.getElementById("parts");
   list.innerHTML = "loading---";
   loadParts();
@@ -36,11 +32,8 @@ function createPartPreviw(partData) {
 
   element.querySelector("a").addEventListener("click", (event) => {
     event.preventDefault();
-    showDetailsView(partData._id);
+    showView('details',startDetails, partData._id)
   });
   return element;
 }
 
-//label=labelModel
-
-//qty=qtyYear

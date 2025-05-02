@@ -1,9 +1,4 @@
-export function showDetailsView(partId) {
-  document
-    .querySelectorAll("section")
-    .forEach((s) => (s.style.display = "none"));
-  document.getElementById("details").style.display = "block";
-
+export function startDetails(partId) {
   document.querySelector("#details h2").innerHTML = "loading........";
   document.querySelector("#details .subtitle").innerHTML = "laoloading/>/>/>";
   document.querySelector("#details .description").innerHTML = "loadinG";
