@@ -6,11 +6,11 @@ document.querySelector("#create form").addEventListener("submit", onCreate);
 async function onCreate(event) {
   event.preventDefault();
 
-  const accessToken=localStorage.getItem('accessToken')
-  if(!accessToken){
-    alert('please LOGIN')
-    showView('login')
-    return
+  const accessToken = localStorage.getItem("accessToken");
+  if (!accessToken) {
+    alert("please LOGIN");
+    showView("login");
+    return;
   }
 
   const formData = new FormData(event.target);
@@ -35,7 +35,7 @@ async function onCreate(event) {
     method: "post",
     headers: {
       "Content-Type": "application/json",
-      'X-Authorization':accessToken
+      "X-Authorization": accessToken,
     },
     body: JSON.stringify({
       label,
@@ -45,12 +45,11 @@ async function onCreate(event) {
     }),
   });
 
-  if(!response.ok){
-    const error=await response.json()
-    return alert('error:'+error.message)
+  if (!response.ok) {
+    const error = await response.json();
+    return alert("error:" + error.message);
   }
 
-  const result=await response.json()
-  showView('details', startDetails, result._id)
-
+  const result = await response.json();
+  showView("details", startDetails, result._id);
 }

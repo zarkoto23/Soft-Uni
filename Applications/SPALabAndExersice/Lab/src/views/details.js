@@ -7,7 +7,9 @@ export function startDetails(partId) {
 }
 
 async function loadDetails(partId) {
-  const response = await fetch("http://localhost:3030/data/autoparts/" + partId);
+  const response = await fetch(
+    "http://localhost:3030/data/autoparts/" + partId
+  );
   if (!response.ok) {
     return alert("eror loading details.,.,.");
   }

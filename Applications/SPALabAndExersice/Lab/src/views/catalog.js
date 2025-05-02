@@ -32,8 +32,7 @@ function createPartPreviw(partData) {
 
   element.querySelector("a").addEventListener("click", (event) => {
     event.preventDefault();
-    showView('details',startDetails, partData._id)
+    showView("details", startDetails, partData._id);
   });
   return element;
 }
-
