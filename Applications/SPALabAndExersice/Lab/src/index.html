@@ -13,11 +13,10 @@
 <body>
   <nav>
     <a id="home-nav" href="/">home</a>
-    <a id="catalog-nav" href="/catalog">catalog</a>
+    <a id="catalog-nav" href="/catalog">Catalog</a>
+    <a id="create-nav" href="/create">Create</a>
     <a id="login-nav" href="/login">Login</a>
     <a id="register-nav" href="/register">Register</a>
-
-
   </nav>
 
   <section id="home">
@@ -64,6 +63,18 @@
       <p>Already have an account? <a id="login-link" href="/login">Login Here</a></p>
     </form>
   </section>
+
+
+<section id="create">
+  <h1>CreateNewPart</h1>
+  <form>
+    <label>Label: <input type="text" name="label"></label>
+    <label>PRice: <input type="number" step="0.01" name="price"></label>
+    <label>Qty: <input type="number" step="1" name="qty"></label>
+    <label>Qty: <textarea name="description"></textarea></label>
+    <button>Publish</button>
+  </form>
+</section>
 
 
   <footer>
