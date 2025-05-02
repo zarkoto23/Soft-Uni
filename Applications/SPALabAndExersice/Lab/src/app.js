@@ -1,11 +1,17 @@
 import { startCatalog } from "./views/catalog.js";
 import { showView } from "./views/nav.js";
+import "./views/login.js"
 
 const views={
   'home-nav':['home'],
   'catalog-nav':['catalog', startCatalog],
   'catalog-link':['catalog',startCatalog],
-  'login-nav':['login']
+  'login-nav':['login'],
+  'login-link':['login'],
+  'register-nav':['register'],
+  'register-link':['register'],
+
+
 }
 
 for(let linkId in views){
