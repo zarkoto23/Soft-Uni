@@ -5,6 +5,7 @@ const views={
   'home-nav':['home'],
   'catalog-nav':['catalog', startCatalog],
   'catalog-link':['catalog',startCatalog],
+  'login-nav':['login']
 }
 
 for(let linkId in views){
