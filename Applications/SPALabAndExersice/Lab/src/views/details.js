@@ -7,7 +7,7 @@ export function startDetails(partId) {
 }
 
 async function loadDetails(partId) {
-  const response = await fetch("http://localhost:3030/data/catalog/" + partId);
+  const response = await fetch("http://localhost:3030/data/autoparts/" + partId);
   if (!response.ok) {
     return alert("eror loading details.,.,.");
   }
@@ -19,10 +19,10 @@ async function loadDetails(partId) {
 }
 
 function showDetails(data) {
-  document.querySelector("#details h2").textContent = data.model;
+  document.querySelector("#details h2").textContent = data.label;
   document.querySelector(
     "#details .subtitle"
-  ).innerHTML = `<span class="price">$${data.price}</span> | <span class="stock">${data.year} in stock</span>`;
+  ).innerHTML = `<span class="price">$${data.price}</span> | <span class="stock">${data.qtyY} in stock</span>`;
   document.querySelector("#details .description").textContent =
     data.description;
 }

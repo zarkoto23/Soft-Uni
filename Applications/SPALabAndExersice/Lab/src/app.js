@@ -1,6 +1,8 @@
 import { startCatalog } from "./views/catalog.js";
 import { showView } from "./views/nav.js";
 import "./views/login.js"
+import "./views/create.js"
+
 
 const views={
   'home-nav':['home'],
@@ -10,8 +12,7 @@ const views={
   'login-link':['login'],
   'register-nav':['register'],
   'register-link':['register'],
-
-
+  'create-nav':['create']
 }
 
 for(let linkId in views){
@@ -24,6 +25,8 @@ for(let linkId in views){
     
   })
 }
+
+//chek for user sesssion and update nav link visibility
 showView('home')
 
 
