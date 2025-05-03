@@ -9,3 +9,11 @@ section{
 /* label{
   display: block;
 } */
+
+
+#parts li {
+  cursor: pointer;       /* Променя курсора на ръка */
+  text-decoration: underline; /* Прави текста подчертан */
+  color: blue;           /* По желание - да изглежда като линк */
+}
+

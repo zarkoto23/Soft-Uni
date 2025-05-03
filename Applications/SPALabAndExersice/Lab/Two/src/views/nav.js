@@ -1,4 +1,4 @@
-export function showView(sectionId, callback, param){
+function showView(sectionId, callback, param){
 
   document.querySelectorAll('section').forEach(section=>{
     section.style.display='none'
@@ -9,4 +9,8 @@ export function showView(sectionId, callback, param){
   if(callback){
     callback(param)
   }
+}
+
+export {
+  showView
 }
