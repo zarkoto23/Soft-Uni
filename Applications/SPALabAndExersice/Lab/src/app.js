@@ -24,8 +24,10 @@ for (let linkId in views) {
   });
 }
 
-//chek for user sesssion and update nav link visibility
 showView("home");
+
+//chek for user sesssion and update nav link visibility
+
 
 // document.getElementById("home-nav").addEventListener("click", (event) => {
 //   event.preventDefault();
