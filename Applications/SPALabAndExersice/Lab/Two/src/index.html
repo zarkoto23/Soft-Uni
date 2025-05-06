@@ -14,6 +14,8 @@
     <a id="home-nav" href="/">Home</a>
     <a id="list-nav" href="/list">List</a>
     <a id="login-nav" href="/login">LogIn</a>
+    <a id="register-nav" href="/register">Register</a>
+
   </nav>
 
   <section id="home">
@@ -34,10 +36,20 @@
     <form>
       <label>Email: <input type="text" name="email"></label>
       <label>Password: <input type="password" name="password"></label>
-      <button>log in</button>
-      <p>if you dont have account - <a href="/register">Register Here</a></p>
+      <button type="submit">log in</button>
+      <p>if you dont have account - <a id="register-link" href="/register">Register Here</a></p>
     </form>
+  </section>
 
+  <section id="register">
+    <h1>Fill up your data</h1>
+    <form>
+      <label>Email: <input type="text" name="email"></label>
+      <label>Password: <input type="password" name="password"></label>
+      <label>Repeat Password: <input type="password" name="repass"></label>
+      <button type="submit">register</button>
+      <p>if you already have account - <a id="login-link" href="/login">Login Here</a></p>
+    </form>
   </section>
 
 

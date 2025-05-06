@@ -1,5 +1,5 @@
 
-async function loadParts() {
+async function loadParts(event) {
   const response = await fetch("http://localhost:3030/data/autoparts");
   const data = await response.json();
 

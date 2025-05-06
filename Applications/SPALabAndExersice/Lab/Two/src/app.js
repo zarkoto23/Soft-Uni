@@ -1,11 +1,15 @@
 import { loadParts } from "./views/list.js";
 import { showView } from "./views/nav.js";
+import './views/login.js'
 
 const views = {
   "home-nav": ["home"],
   "list-nav": ["list", loadParts],
   "login-nav":['login'],
-  "login":['login']
+  "login-link":['login'],
+  "register-nav":["register"],
+  "register-link":["register"]
+
 };
 
 for (let linkId in views) {
