@@ -16,7 +16,7 @@ function showParts(data){
     li.textContent=`${element.label} - $${element.price}\n`
 
     li.addEventListener('click',(e)=>
-    console.log(e.target.textContent))
+    console.log(e.label))
 
     ul.appendChild(li)
   });
