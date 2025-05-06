@@ -1,3 +1,4 @@
+import { addNewPart } from "./create.js";
 
 async function loadParts(event) {
   const response = await fetch("http://localhost:3030/data/autoparts");
@@ -5,7 +6,6 @@ async function loadParts(event) {
 
   showParts(data);
 }
-
 function showParts(data) {
   const ul = document.getElementById("parts");
   ul.textContent = "";
@@ -16,9 +16,10 @@ function showParts(data) {
 
     li.addEventListener("click", () => showDetails(element, li));
   });
+  
 }
 
-function showDetails(element, li) {
+ function showDetails(element, li) {
   const allDetails = document.querySelectorAll(".details");
   allDetails.forEach((detail) => {
     if (!li.contains(detail)) {

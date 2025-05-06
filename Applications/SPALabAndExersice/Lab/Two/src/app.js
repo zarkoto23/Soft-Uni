@@ -1,6 +1,7 @@
 import { loadParts } from "./views/list.js";
 import { showView } from "./views/nav.js";
 import './views/login.js'
+import './views/create.js'
 
 const views = {
   "home-nav": ["home"],
@@ -8,8 +9,8 @@ const views = {
   "login-nav":['login'],
   "login-link":['login'],
   "register-nav":["register"],
-  "register-link":["register"]
-
+  "register-link":["register"],
+  "add-part":['add-part']
 };
 
 for (let linkId in views) {
