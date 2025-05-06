@@ -1,16 +1,16 @@
-body{
+body {
   background-color: aquamarine;
 }
 
-section{
+section {
   display: none;
 }
 
-label{
+label {
   display: block;
 }
 
-#parts li{
+#parts li {
   text-decoration: underline;
   color: blue;
   cursor: pointer;
@@ -21,10 +21,8 @@ label{
   color: black !important;
 }
 
-#list h4{
-  color:  rgb(210, 46, 46);
+#list h4 {
+  color: rgb(210, 46, 46);
   text-decoration: underline;
   cursor: pointer;
 }
-
-

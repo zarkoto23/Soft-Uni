@@ -1,16 +1,12 @@
-function showView(sectionId, callback, param){
+function showView(sectionId, callback, param) {
+  document.querySelectorAll("section").forEach((section) => {
+    section.style.display = "none";
+  });
+  document.getElementById(sectionId).style.display = "block";
 
-  document.querySelectorAll('section').forEach(section=>{
-    section.style.display='none'
-
-  })
-  document.getElementById(sectionId).style.display='block'
-
-  if(callback){
-    callback(param)
+  if (callback) {
+    callback(param);
   }
 }
 
-export {
-  showView
-}
+export { showView };

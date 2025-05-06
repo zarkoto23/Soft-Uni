@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,7 +30,7 @@
     <ul id="parts">
       <p>Loading.........</p>
     </ul>
-    <h4>+ Add new Part</h4>
+    <h4 id="parts-link">+ Add new Part</h4>
   </section>
 
 
@@ -38,7 +39,9 @@
     <form>
       <label>Part name: <input type="text" name="part-name"></label>
       <label>Quantyty: <input type="text" name="part-qty" step="1"></label>
-      <label>Price per pcs: <input type="number" name="part-price" step="0.01"></label>
+      <label>Price: <input type="number" name="part-price" step="0.01"></label>
+      <label>Description: <textarea type="text" name="part-description"></textarea></label>
+
       <button>Add</button>
     </form>
   </section>
@@ -70,6 +73,7 @@
   <footer>
     <p>created by Sve &copysr;</p>
   </footer>
-  
+
 </body>
+
 </html>

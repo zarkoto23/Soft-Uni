@@ -1,5 +1,3 @@
-import { addNewPart } from "./create.js";
-
 async function loadParts(event) {
   const response = await fetch("http://localhost:3030/data/autoparts");
   const data = await response.json();
@@ -16,10 +14,9 @@ function showParts(data) {
 
     li.addEventListener("click", () => showDetails(element, li));
   });
-  
 }
 
- function showDetails(element, li) {
+function showDetails(element, li) {
   const allDetails = document.querySelectorAll(".details");
   allDetails.forEach((detail) => {
     if (!li.contains(detail)) {
@@ -52,4 +49,3 @@ function showParts(data) {
 }
 
 export { loadParts };
-
