@@ -6,14 +6,20 @@ section{
   display: none;
 }
 
-/* label{
+label{
   display: block;
-} */
-
-
-#parts li {
-  cursor: pointer;       /* Променя курсора на ръка */
-  text-decoration: underline; /* Прави текста подчертан */
-  color: blue;           /* По желание - да изглежда като линк */
 }
+
+#parts li{
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer;
+}
+
+.details>p {
+  text-decoration: none !important;
+  color: black !important;
+}
+
+
 

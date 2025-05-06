@@ -11,7 +11,7 @@ for (let linkId in views) {
 
   document.getElementById(linkId).addEventListener("click", (e) => {
     e.preventDefault();
-    showView(sectionId,callback);
+    showView(sectionId, callback);
   });
 }
 
