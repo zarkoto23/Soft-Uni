@@ -4,6 +4,9 @@ function showView(sectionId, callback, param) {
   });
   document.getElementById(sectionId).style.display = "block";
 
+
+
+
   if (callback) {
     callback(param);
   }
