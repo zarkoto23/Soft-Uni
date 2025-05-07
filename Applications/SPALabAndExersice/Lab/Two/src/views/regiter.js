@@ -18,25 +18,25 @@ function onRegister(event) {
     return;
   }
 
-  sendRequest(email,password);
+  sendRequest(email, password);
 }
 
-async function sendRequest(email,password) {
+async function sendRequest(email, password) {
   const response = await fetch("http://localhost:3030/users/register", {
     method: "post",
     headers: {
       "Content-Type": "application/json",
     },
-    body:JSON.stringify({
+    body: JSON.stringify({
       email,
-      password
-    }) 
+      password,
+    }),
   });
 
-  const data=await response.json()
-  const accessToken=data.accessToken
+  const data = await response.json();
+  const accessToken = data.accessToken;
 
-  localStorage.setItem('accessToken',accessToken)
-  alert('Your Registration is Succesfull')
-  window.location='/'
+  localStorage.setItem("accessToken", accessToken);
+  alert("Your Registration is Succesfull");
+  window.location = "/";
 }

@@ -1,17 +1,16 @@
 import { loadParts } from "./list.js";
 import { showView } from "./nav.js";
 
-
 document.querySelector("#add-part").addEventListener("submit", onClick);
 
 function onClick(event) {
   event.preventDefault();
 
-  const accessToken=localStorage.getItem('accessToken')
-  if(!accessToken){
-    alert('If you want add a part, please login first!')
-    showView('login')
-    return
+  const accessToken = localStorage.getItem("accessToken");
+  if (!accessToken) {
+    alert("If you want add a part, please login first!");
+    showView("login");
+    return;
   }
   const form = event.target;
 
