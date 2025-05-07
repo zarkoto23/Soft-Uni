@@ -2,6 +2,7 @@ import { loadParts } from "./views/list.js";
 import { showView } from "./views/nav.js";
 import "./views/login.js";
 import "./views/create.js";
+import "./views/regiter.js"
 
 const views = {
   "home-nav": ["home"],
