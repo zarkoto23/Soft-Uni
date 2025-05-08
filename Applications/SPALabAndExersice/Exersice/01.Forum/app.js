@@ -2,10 +2,22 @@ const time=formatDate(new Date())
 
 
 
-document.querySelector(".container form").addEventListener("submit", onSubmit);
+document.querySelector("form").addEventListener("submit", onSubmit);
+
+document.querySelector('.cancel').addEventListener('click', onCancel)
+
+function onCancel(event) {
+  event.preventDefault(); 
+  const form = event.target.closest('form');  
+  form.reset()
+}
 
 async function onSubmit(event) {
   event.preventDefault();
+
+  console.log('submit')
+
+
   const form = event.target;
   const formData = new FormData(event.target);
   const title = formData.get("topicName");
@@ -37,7 +49,9 @@ async function onSubmit(event) {
     return;
   }
 
-  
+
+  onLoad()
+
   
 }
 
@@ -49,6 +63,8 @@ async function onLoad() {
 
     const topicTitleEl=document.querySelector('.topic-title')
     const topicContainerEl=document.querySelector('.topic-container')
+
+    topicTitleEl.textContent='sdfgsdf'
 
 
     
@@ -80,8 +96,9 @@ async function onLoad() {
 
     headerDiv.append(imgEl, pEl, postContentPEl)
     commentDiv.appendChild(headerDiv)
-    topicTitleEl.appendChild(commentDiv)
+    topicContainerEl.appendChild(commentDiv)
   });
+
 }
 
 
@@ -99,5 +116,7 @@ function formatDate(date) {
 }
 
 onLoad()
+
+
 
 
