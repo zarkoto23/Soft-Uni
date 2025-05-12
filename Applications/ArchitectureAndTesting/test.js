@@ -7,7 +7,7 @@ let page;
 
 describe("E2E suite", async function () {
   this.timeout(10000);
-  before(async () => (browser = await chromium.launch()));
+  before(async () => (browser = await chromium.launch({headless: false,slowMo: 2000})));
   after(async () => await browser.close());
 
   beforeEach(async () => (page = await browser.newPage()));
