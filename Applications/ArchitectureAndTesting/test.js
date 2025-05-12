@@ -1,11 +1,23 @@
 const { chromium } = require("playwright-chromium");
-const {expect}= require('chai')
+// const {expect}= require('chai')
 
-(async () => {
-  const browser = await chromium.launch();
-  const page = await browser.newPage();
-  await page.goto("https://softuni.bg/trainings/resources/video/101698/video-08-july-2024-viktor-kostadinov-js-applications-june-2024/4544");
-  await page.screenshot({ path: "screenshot.png" });
-  await browser.close();
-})();
+
+let browser;
+let page;
+
+describe('E2E suite',async function(){
+  this.timeout(10000)
+  before(async()=> browser= await chromium.launch())
+  after(async()=>await browser.close())
+  beforeEach(async()=>page=await browser.newPage())  
+  afterEach(async()=>await page.close())
+
+  it('screenshotT',async ()=>{
+    await page.goto('https://gmail.com')
+    await page.screenshot({path:'screenshot00.png'})
+
+  })
+})
+
+
 
