@@ -1,4 +1,5 @@
 const { chromium } = require("playwright-chromium");
+const {expect}= require('chai')
 
 (async () => {
   const browser = await chromium.launch();
