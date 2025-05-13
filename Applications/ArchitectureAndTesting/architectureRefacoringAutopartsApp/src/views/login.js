@@ -1,29 +1,18 @@
-document.querySelector('#login form').addEventListener('submit', onLogin);
+import { post } from "../data/api.js";
+import { createSubmitHandler, setUserData } from "../util.js";
 
-async function onLogin(event) {
-    event.preventDefault();
+const loginHandler = createSubmitHandler(onLogin);
 
-    const formData = new FormData(event.target);
-    const email = formData.get('email');
-    const password = formData.get('password');
+document.querySelector("#login form").addEventListener("submit", loginHandler);
 
-    const response = await fetch('http://localhost:3030/users/login', {
-        method: 'post',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email, password })
-    });
+async function onLogin({ email, password }, form) {
+  const userData = await post("/users/login", {
+    email,
+    password,
+  });
 
-    if (!response.ok) {
-        const error = await response.json();
-        return alert('Error signing in:\n' + error.message);
-    }
+  setUserData(userData);
 
-    const userData = await response.json();
-
-    localStorage.userId = userData._id;
-    localStorage.accessToken = userData.accessToken;
-
-    window.location = '/';
+  form.reset();
+  window.location = "/";
 }

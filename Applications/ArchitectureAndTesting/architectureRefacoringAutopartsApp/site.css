@@ -1,11 +1,11 @@
 body {
-    background-color: lavender;
+  background-color: lavender;
 }
 
 section {
-    display: none;
+  display: none;
 }
 
 label {
-    display: block;
+  display: block;
 }
