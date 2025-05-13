@@ -1,0 +1,11 @@
+body {
+    background-color: lavender;
+}
+
+#views {
+    display: none;
+}
+
+label {
+    display: block;
+}

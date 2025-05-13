@@ -1,12 +1,15 @@
-import { showView } from "../nav.js";
-import { startDetails } from "./details.js";
+
 import { get } from "../data/api.js";
 
-export function startCatalog() {
-  const list = document.getElementById("parts");
+const section = document.getElementById("catalog");
+
+export function showCatalog() {
+  const list = document.querySelector("#parts");
   list.innerHTML = "Loading &hellip;";
 
   loadParts();
+
+  return section
 }
 
 async function loadParts() {
@@ -17,7 +20,7 @@ async function loadParts() {
 function showParts(parts) {
   const elements = parts.map(createPartPreview);
 
-  const list = document.getElementById("parts");
+  const list = document.querySelector("#parts");
 
   list.replaceChildren(...elements);
 }
@@ -29,7 +32,7 @@ function createPartPreview(partData) {
 
   element.querySelector("a").addEventListener("click", (event) => {
     event.preventDefault();
-    showView("details", startDetails, partData._id);
+    navTo("details",partData._id);
   });
 
   return element;

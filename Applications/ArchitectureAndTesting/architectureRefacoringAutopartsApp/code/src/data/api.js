@@ -1,4 +1,4 @@
-import { getUserData } from "../util";
+import { getUserData } from "../util.js";
 
 const hostName = "http://localhost:3030";
 
@@ -13,7 +13,7 @@ export async function request(method, url, data) {
     options.body = JSON.stringify(data);
   }
   const userData = getUserData();
-  const accessToken = userData.accessToken;
+  const accessToken = userData?.accessToken;
 
   if (accessToken) {
     options.headers["X-Authorization"] = accessToken;

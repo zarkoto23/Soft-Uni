@@ -1,0 +1,5 @@
+[x] Unify request logic
+[ ] Improve app navigation and rendering
+[ ] Extract DOM section handling
+[x] Parameterize form handling
+[x] Extract localStorage and user sessions

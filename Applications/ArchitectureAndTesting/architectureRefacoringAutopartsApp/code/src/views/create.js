@@ -1,5 +1,5 @@
 import { post } from "../data/api.js";
-import { showView } from "../nav.js";
+import { navTo } from "../nav.js";
 import { createSubmitHandler } from "../util.js";
 import { startDetails } from "./details.js";
 
@@ -30,5 +30,5 @@ async function onCreate({ label, price, qty, description }, form) {
 
   form.reset();
 
-  showView("details", startDetails, result._id);
+  navTo("details", startDetails, result._id);
 }
