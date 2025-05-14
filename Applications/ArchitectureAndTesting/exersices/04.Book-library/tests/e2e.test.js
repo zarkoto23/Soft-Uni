@@ -1,7 +1,7 @@
-const { chromium } = require('playwright-chromium');
-const { expect } = require('chai');
+const { chromium } = require("playwright-chromium");
+const { expect } = require("chai");
 
-const host = 'http://localhost:3000'; // Application host (NOT service host - that can be anything)
+const host = "http://localhost:3000"; // Application host (NOT service host - that can be anything)
 
 const DEBUG = true;
 const slowMo = 1000;
@@ -9,20 +9,20 @@ const slowMo = 1000;
 const mockData = {
   catalog: [
     {
-      author: 'Author1',
-      title: 'Book1',
-      _id: '1001',
+      author: "Author1",
+      title: "Book1",
+      _id: "1001",
     },
     {
-      author: 'Author2',
-      title: 'Book2',
-      _id: '1002',
+      author: "Author2",
+      title: "Book2",
+      _id: "1002",
     },
   ],
 };
 
 const endpoints = {
-  catalog: '/jsonstore/collections/books',
+  catalog: "/jsonstore/collections/books",
   details: (id) => `/jsonstore/collections/books/${id}`,
   delete: (id) => `/jsonstore/collections/books/${id}`,
 };
@@ -31,14 +31,14 @@ let browser;
 let context;
 let page;
 
-describe('E2E tests', function () {
+describe("E2E tests", function () {
   // Setup
   this.timeout(DEBUG ? 120000 : 7000);
   before(
     async () =>
-    (browser = await chromium.launch(
-      DEBUG ? { headless: false, slowMo } : {}
-    ))
+      (browser = await chromium.launch(
+        DEBUG ? { headless: false, slowMo } : {}
+      ))
   );
   after(async () => await browser.close());
   beforeEach(async () => {
@@ -52,75 +52,93 @@ describe('E2E tests', function () {
   });
 
   // Test proper
-  describe('Book Library', () => {
-    // it('Load Books', async () => {
-    //   const data=mockData.catalog
-    //   const {get}=await(handle(endpoints.catalog))
-    //   get(data)
-    //   await page.goto(host)
-    //   await page.waitForSelector('#loadBooks')
-    //   page.click('#loadBooks')
+  describe("Book Library", () => {
+    it("Load Books", async () => {
+      const data = mockData.catalog;
+      const { get } = await handle(endpoints.catalog);
+      get(data);
+      await page.goto(host);
+      await page.waitForSelector("#loadBooks");
+      page.click("#loadBooks");
 
-    //   const books=await page.$$eval('tbody tr', (t)=>t.map((s)=>s.newContent))
+      const books = await page.$$eval("tbody tr", (t) =>
+        t.map((s) => s.newContent)
+      );
 
-
-    //   expect(books.length).to.equal(data.length)
-
-    // });
-
-    // it('Check books info', async () => {
-    //     const data=mockData.catalog
-    //     const {get}=await handle(endpoints.catalog)
-    //     get(data)
-    //     await page.goto(host)
-    //       await page.waitForSelector('#loadBooks')
-    //       await page.click('#loadBooks')
-
-    //      const books=await page.$$eval('tbody tr td', (t)=>{
-    //       return t.map((s)=>s.textContent)
-    //      })
-
-    //     expect(books[0]).to.equal(data[0].title)
-    //     expect(books[1]).to.equal(data[0].author)
-       // });
-
-
-    it('Create Book', async () => {
-      const data=mockData.catalog[0]
-      await page.goto(host)
-      const {post }=await handle(endpoints.catalog)
-      const {onRequest}=post()
-      await page.waitForSelector('form')
-
-
-      await page.fill('input[name="title"]', data.title)
-      await page.fill('input[name="author"]', data.author)
-
-      const [request]=await Promise.all([
-        onRequest(),
-        page.click('text=Submit')
-      ])
-
-      const postData=JSON.parse(request.postData())
-      expect(postData.title).to.equal(data.title)
-      expect(postData.author).to.equal(data.author)
-
-      
-
+      expect(books.length).to.equal(data.length);
     });
 
-    // it('Edit should populate form with correct data', async () => {
+    it("Check books info", async () => {
+      const data = mockData.catalog;
+      const { get } = await handle(endpoints.catalog);
+      get(data);
+      await page.goto(host);
+      await page.waitForSelector("#loadBooks");
+      await page.click("#loadBooks");
 
-    //   //TODO
-      
-    // });
+      const books = await page.$$eval("tbody tr td", (t) => {
+        return t.map((s) => s.textContent);
+      });
+
+      expect(books[0]).to.equal(data[0].title);
+      expect(books[1]).to.equal(data[0].author);
+    });
+
+    it("Create Book", async () => {
+      const data = mockData.catalog[0];
+      await page.goto(host);
+      const { post } = await handle(endpoints.catalog);
+      const { onRequest } = post();
+      await page.waitForSelector("form");
+
+      await page.fill('input[name="title"]', data.title);
+      await page.fill('input[name="author"]', data.author);
+
+      const [request] = await Promise.all([
+        onRequest(),
+        page.click("text=Submit"),
+      ]);
+
+      const postData = JSON.parse(request.postData());
+      expect(postData.title).to.equal(data.title);
+      expect(postData.author).to.equal(data.author);
+    });
+
+    it("Edit should populate form with correct data", async () => {
+      const info = mockData.catalog;
+
+      const data = mockData.catalog[0];
+
+      await page.goto(host);
+
+      const { get } = await handle(endpoints.catalog);
+      get(info);
+
+      await page.click("#loadBooks");
+
+      const { get2 } = await handle(endpoints.details(data._id));
+
+      get2(data);
+      // await page.waitForSelector(`tr:has-text("${data.title}") >> text=Edit`)
+
+      await page.click(`tr:has-text("${data.title}") >> text=Edit`);
+
+      await page.waitForSelector("form");
+
+      const input = await page.$$eval("form input", (t) =>
+        t.map((i) => i.value)
+      );
+
+      expect(input[0]).to.equal(data.title);
+      expect(input[1]).to.equal(data.author);
+    });
   });
 });
 
 async function setupContext(context) {
   // Catalog and Details
   await handleContext(context, endpoints.catalog, { get: mockData.catalog });
-  await handleContext(context, endpoints.details('1001'), {
+  await handleContext(context, endpoints.details("1001"), {
     get: mockData.catalog[0],
   });
 
@@ -129,7 +147,7 @@ async function setupContext(context) {
     (url) => url.href.slice(0, host.length) != host,
     (route) => {
       if (DEBUG) {
-        console.log('Preventing external call to ' + route.request().url());
+        console.log("Preventing external call to " + route.request().url());
       }
       route.abort();
     }
@@ -147,20 +165,20 @@ function handleContext(context, match, handlers) {
 async function handleRaw(match, handlers) {
   const methodHandlers = {};
   const result = {
-    get: (returns, options) => request('GET', returns, options),
-    get2: (returns, options) => request('GET', returns, options),
-    post: (returns, options) => request('POST', returns, options),
-    put: (returns, options) => request('PUT', returns, options),
-    patch: (returns, options) => request('PATCH', returns, options),
-    del: (returns, options) => request('DELETE', returns, options),
-    delete: (returns, options) => request('DELETE', returns, options),
+    get: (returns, options) => request("GET", returns, options),
+    get2: (returns, options) => request("GET", returns, options),
+    post: (returns, options) => request("POST", returns, options),
+    put: (returns, options) => request("PUT", returns, options),
+    patch: (returns, options) => request("PATCH", returns, options),
+    del: (returns, options) => request("DELETE", returns, options),
+    delete: (returns, options) => request("DELETE", returns, options),
   };
 
   const context = this;
 
   await context.route(urlPredicate, (route, request) => {
     if (DEBUG) {
-      console.log('>>>', request.method(), request.url());
+      console.log(">>>", request.method(), request.url());
     }
 
     const handler = methodHandlers[request.method().toLowerCase()];
@@ -173,7 +191,7 @@ async function handleRaw(match, handlers) {
 
   if (handlers) {
     for (let method in handlers) {
-      if (typeof handlers[method] == 'function') {
+      if (typeof handlers[method] == "function") {
         handlers[method](result[method]);
       } else {
         result[method](handlers[method]);
@@ -217,10 +235,10 @@ function respond(data, options = {}) {
   );
 
   const headers = {
-    'Access-Control-Allow-Origin': '*',
+    "Access-Control-Allow-Origin": "*",
   };
   if (options.json) {
-    headers['Content-Type'] = 'application/json';
+    headers["Content-Type"] = "application/json";
     data = JSON.stringify(data);
   }
 
