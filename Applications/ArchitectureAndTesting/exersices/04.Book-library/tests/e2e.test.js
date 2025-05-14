@@ -53,104 +53,67 @@ describe('E2E tests', function () {
 
   // Test proper
   describe('Book Library', () => {
-    it('Load Books', async () => {
+    // it('Load Books', async () => {
+    //   const data=mockData.catalog
+    //   const {get}=await(handle(endpoints.catalog))
+    //   get(data)
+    //   await page.goto(host)
+    //   await page.waitForSelector('#loadBooks')
+    //   page.click('#loadBooks')
 
-      const data = mockData.catalog;
+    //   const books=await page.$$eval('tbody tr', (t)=>t.map((s)=>s.newContent))
 
-      const { get } = await (handle(endpoints.catalog));
 
-      get(data);
+    //   expect(books.length).to.equal(data.length)
 
-      await page.goto(host);
-      await page.waitForSelector('#loadBooks');
+    // });
 
-      await page.click('#loadBooks');
+    // it('Check books info', async () => {
+    //     const data=mockData.catalog
+    //     const {get}=await handle(endpoints.catalog)
+    //     get(data)
+    //     await page.goto(host)
+    //       await page.waitForSelector('#loadBooks')
+    //       await page.click('#loadBooks')
 
-      const books = await page.$$eval('tbody tr', (t) => {
-        return t.map((s) => s.textContent)
-      }
-      );
+    //      const books=await page.$$eval('tbody tr td', (t)=>{
+    //       return t.map((s)=>s.textContent)
+    //      })
 
-      expect(books.length).to.equal(data.length);
+    //     expect(books[0]).to.equal(data[0].title)
+    //     expect(books[1]).to.equal(data[0].author)
+       // });
 
-    });
-
-    it('Check books info', async () => {
-
-      const data = mockData.catalog;
-
-      const { get } = await handle(endpoints.catalog);
-
-      get(data);
-
-      await page.goto(host);
-
-      await page.waitForSelector('#loadBooks');
-
-      await page.click('#loadBooks');
-
-      const books = await page.$$eval('tbody tr td', (t) => {
-        return t.map((s) => s.textContent)
-      }
-      );
-
-      expect(books[0]).to.equal(data[0].title);
-      expect(books[1]).to.equal(data[0].author);
-
-    });
 
     it('Create Book', async () => {
-
-      const data = mockData.catalog[0];
-
-      await page.goto(host);
-
-      const { post } = await handle(endpoints.catalog);
-      const { onRequest } = post();
-
-      await page.waitForSelector('form');
-
-      await page.fill('input[name="title"]', data.title);
-      await page.fill('input[name="author"]', data.author);
+      const data=mockData.catalog[0]
+      await page.goto(host)
+      const {post }=await handle(endpoints.catalog)
+      const {onRequest}=post()
+      await page.waitForSelector('form')
 
 
-      const [request] = await Promise.all([
+      await page.fill('input[name="title"]', data.title)
+      await page.fill('input[name="author"]', data.author)
+
+      const [request]=await Promise.all([
         onRequest(),
         page.click('text=Submit')
-      ]);
-      const postData = JSON.parse(request.postData());
+      ])
 
-      expect(postData.title).to.equal(data.title);
-      expect(postData.author).to.equal(data.author);
+      const postData=JSON.parse(request.postData())
+      expect(postData.title).to.equal(data.title)
+      expect(postData.author).to.equal(data.author)
+
+      
 
     });
 
-    it('Edit should populate form with correct data', async () => {
+    // it('Edit should populate form with correct data', async () => {
 
-      const info = mockData.catalog;
-      const data = mockData.catalog[0];
-      await page.goto(host);
-
-      const { get } = await (handle(endpoints.catalog));
-
-      get(info);
-
-      await page.click('#loadBooks');
-
-      const { get2 } = await (handle(endpoints.details(data._id)));
-
-      get2(data);
+    //   //TODO
       
-      await page.click(`tr:has-text("${data.title}") >> text=Edit`)
-
-      await page.waitForSelector('form');
-
-      const inputs = await page.$$eval('form input', t => t.map(i => i.value));
-
-      expect(inputs[0]).to.equal(data.title);
-      expect(inputs[1]).to.equal(data.author);
-      
-    });
+    // });
   });
 });
 

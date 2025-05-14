@@ -8,14 +8,19 @@ const slowMo = 2000;
 
 const mockData = {
   list: [
-    {
-      author: 'Spami',
-      content: 'Hello, are you there?',
+    // {
+    //   author: 'Spami',
+    //   content: 'Hello, are you there?',
+    // },
+    // {
+    //   author: 'Garry',
+    //   content: 'Yep, whats up :?',
+    // },
+     {
+      author: 'zarko',
+      content: 'lapaite',
     },
-    {
-      author: 'Garry',
-      content: 'Yep, whats up :?',
-    },
+
   ],
 };
 
@@ -49,48 +54,47 @@ describe('E2E tests', function () {
 
   // Test proper
   describe('Messenger Info', () => {
-    it('Load Message', async () => {
+    it('Load Message', async () => {  
+      //todo:
+      const data=mockData.list
+      const {get}= await handle(endpoints.list)
 
-      const data = mockData.list;
-      const { get } = await handle(endpoints.list);
+      get(data)
 
-      get(data);
+      await page.goto(host)
+      await page.waitForSelector('#refresh')
+      await page.click('#refresh')
 
-      await page.goto(host);
-      await page.waitForSelector('#refresh');
+      const post=await page.$$eval('textarea', (t)=>t.map((r)=>r.value))
 
-      await page.click("input[value='Refresh']");
-
-      const post = await page.$$eval(`textarea`, (t) => t.map((r) => r.value));
-
-
-      expect(post[0]).to.equal(`${data[0].author}: ${data[0].content}\n${data[1].author}: ${data[1].content}`)
+      expect(post[0]).to.be.equal( `${data[0].author}: ${data[0].content}`)
 
     });
 
     it('Send Message API call', async () => {
+      const data ={
+      author: 'Spami',
+      content: 'Hello, are you there?',
+    }
 
-      const data = mockData.list[0];
+    await page.goto(host)
+    const {post}=await handle(endpoints.list)
+    const {onRequest}=post()
 
-      await page.goto(host);
+    await page.waitForSelector('#submit')
+    await page.fill('input[name="author"]',data.author+ '6')
+    await page.fill('input[name="content"]',data.content+ '6')
 
-      const { post } = await handle(endpoints.list);
-      const { onRequest } = post();
+    const [req]=await Promise.all([
+      onRequest(),
+      page.click('input[value="Send"]')
+    ])
 
-      await page.waitForSelector('#submit');
+    const postData=JSON.parse(req.postData())
 
-      await page.fill('input[name = "author"]', data.author );
-      await page.fill('input[name = "content"]', data.content );
+    expect(postData.author).to.equal(data.author+'6')
+    expect(postData.content).to.equal(data.content+'6')
 
-      const [request] = await Promise.all([
-        onRequest(),
-        page.click('input[value = "Send"]'),
-      ]);
-
-      const postData = JSON.parse(request.postData());
-
-      expect(postData.author).to.equal(postData.author );
-      expect(postData.content).to.equal(postData.content );
 
     });
   });

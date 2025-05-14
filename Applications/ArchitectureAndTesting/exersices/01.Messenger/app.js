@@ -10,6 +10,10 @@ function attachEvents() {
         let name = nameRef.value;
         let text = textRef.value;
 
+        if(text==''||name==''){
+          return
+        }
+
         let data = {
             method: "POST",
             headers: {
