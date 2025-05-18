@@ -28,7 +28,7 @@ function update() {
 
 function toggleDetails() {
   for (const contact of contacts) {
-    contact.details = contact == this&& !this.details
+    contact.details = contact == this && !this.details;
   }
 
   update();
