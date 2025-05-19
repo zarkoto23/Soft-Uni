@@ -1,0 +1,29 @@
+{
+  "name": "01.list-towns",
+  "version": "1.0.0",
+  "main": "app.js",
+  "type": "module",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "lit-html": "^3.3.0",
+    "lite-server": "^2.6.1"
+  },
+  "lite-server": {
+    "server": {
+      "baseDir": "./",
+      "routes": {
+        "/node_modules": "node_modules"
+      }
+    }
+  }
+}
