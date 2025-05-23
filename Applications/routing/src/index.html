@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autoparts/members Demo</title>
+  <link rel="stylesheet" href="site.css">
+  <script type="module" src="app.js"></script>
+
+</head>
+
+<body>
+  <nav>
+    <a id="home-nav" href="/">home</a>
+    <a id="catalog-nav" href="/catalog">Catalog</a>
+    <a id="create-nav" href="/create">Create</a>
+    <a id="login-nav" href="/login">Login</a>
+    <a id="register-nav" href="/register">Register</a>
+  </nav>
+
+  <section id="home">
+
+    <h1>Welcome to autoparts/members</h1>
+    <p>Browse a wide selection of quality parts for your car</p>
+    <p><a id="catalog-link" href="/catalog">open Catalog</a></p>
+  </section>
+
+  <section id="catalog">
+
+    <h1>Part catalog</h1>
+    <ul id="parts">
+      <p>Loading &hellip;</p>
+    </ul>
+  </section>
+
+  <section id="details">
+    <h1>part details</h1>
+    <h2>loading.,.&hellip;</h2> <!-- part labelName -->
+    <p class="subtitle">loading.,.&hellip;</h2> <!-- part price and quantytyYear in stock -->
+    <p class="description">loading.,.&hellip;</h2> <!-- part description -->
+
+  </section>
+
+  <section id="login">
+    <h1>Login</h1>
+    <form>
+      <label >Email: <input type="text" name="email"></label>
+      <label >Password: <input type="password" name="password"></label>
+      <button>SignIn</button>
+      <p>Don't have account? <a id="register-link" href="/register">RegisterNow</a></p>
+    </form>
+  </section>
+
+
+  <section id="register">
+    <h1>Register</h1>
+    <form>
+      <label >Email: <input type="text" name="email"></label>
+      <label >Password: <input type="password" name="password"></label>
+      <label >Repeat: <input type="password" name="repass"></label>
+      <button>SignReg</button>
+      <p>Already have an account? <a id="login-link" href="/login">Login Here</a></p>
+    </form>
+  </section>
+
+
+<section id="create">
+  <h1>CreateNewPart</h1>
+  <form>
+    <label>Label: <input type="text" name="label"></label>
+    <label>PRice: <input type="number" step="0.01" name="price"></label>
+    <label>Qty: <input type="number" step="1" name="qty"></label>
+    <label>Qty: <textarea name="description"></textarea></label>
+    <button>Publish</button>
+  </form>
+</section>
+
+
+  <footer>
+    <p>copyright &copy; 2025 Sve</p>
+  </footer>
+
+
+</body>
+
+</html>
