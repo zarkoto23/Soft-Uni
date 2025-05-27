@@ -1,3 +1,5 @@
+import page from "../node_modules/page/page.mjs"
+
 import { startCatalog } from "./views/catalog.js";
 import { showView } from "./views/nav.js";
 import "./views/login.js";
@@ -14,6 +16,15 @@ const views = {
   "create-nav": ["create"],
 };
 
+page('/',showView('home'))
+page('/catalog',showView('catalog'))
+page('/login',showView('login'))
+page('/register',showView('register'))
+page('/create',showView('create'))
+page('/',showView('home'))
+
+page.start()
+
 for (let linkId in views) {
   document.getElementById(linkId).addEventListener("click", (event) => {
     event.preventDefault();
@@ -24,7 +35,7 @@ for (let linkId in views) {
   });
 }
 
-showView("home");
+// showView("home");
 
 //chek for user sesssion and update nav link visibility
 
