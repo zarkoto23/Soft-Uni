@@ -54,6 +54,7 @@ async function onSubmit(e) {
 
   if (!response.ok) {
     const eror = await response.json();
+    alert(eror.message)
   }
 
   const data = await response.json();

@@ -17,6 +17,7 @@ export async function showDetails(ctx){
   
 }
 
+
 function detailsTemplate(data){
   
   const isOwner= data._ownerId===util.id
@@ -44,7 +45,7 @@ function detailsTemplate(data){
             <p>Material: <span>${data.material}</span></p>
             <div>
               ${isOwner ? html`
-                <a href="/edit/${data.id}" class="btn btn-info">Edit</a>
+                <a href="/edit/${data._id}" class="btn btn-info">Edit</a>
                 <a @click=${()=>onDelete(data)} class="btn btn-red">Delete</a>
                 `:null}
             </div>
