@@ -16,6 +16,12 @@ body {
     background-color: #fff;
 }
 
+#user, #guest {
+  display: none;
+}
+
+
+
 span {
     font-weight: 700;
 }
