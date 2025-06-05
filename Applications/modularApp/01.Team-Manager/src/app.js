@@ -4,7 +4,7 @@ import { getToken, removeUserData } from "./utils.js";
 
 
 function tashak(){
-  return 'Tashakkkk'
+  return 'TashakkkkKKK'
 }
 
 import page from "../node_modules/page/page.mjs";
