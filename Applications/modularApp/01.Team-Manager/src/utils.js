@@ -6,7 +6,7 @@ export function getUserId() {
   return localStorage.getItem("userId");
 }
 
-export function setUserID(userData) {
+export function setUserData(userData) {
   localStorage.setItem("token", userData.accessToken);
   localStorage.setItem("userId", userData.userData._id);
 }
