@@ -25,18 +25,14 @@ function createTemplate() {
   </section>`;
 }
 
-async function createTeam(e){
-  e.preventDefault()
-  const teamData=Object.fromEntries(new FormData(e.currentTarget))
+async function createTeam(e) {
+  e.preventDefault();
+  const teamData = Object.fromEntries(new FormData(e.currentTarget));
 
   try {
-    const result= await teamService.create(teamData)
-    page.redirect(`/details/${teamData._id}`)
-
-    console.log(result);
-    
-    
+    const result = await teamService.create(teamData);
+    page.redirect(`/details/${teamData._id}`);
   } catch (error) {
-    alert(error.message)
+    alert(error.message);
   }
 }

@@ -8,15 +8,12 @@ const mainEl = document.querySelector("main");
 export default async function showDashboardPage() {
   const teams = await teamService.getAll();
 
-  const members=await membersService.getAll()
+  const members = await membersService.getAll();
 
-  teams.forEach(team => {
-    const teamMembers=members.filter(m=>m.teamId===team._id)
-    team.membersCount=teamMembers.length
+  teams.forEach((team) => {
+    const teamMembers = members.filter((m) => m.teamId === team._id);
+    team.membersCount = teamMembers.length;
   });
-  console.log(teams);
-  
-  
 
   render(dashboardTemplate(teams), mainEl);
 }
