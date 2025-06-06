@@ -1,13 +1,16 @@
 import { html, render } from "../../node_modules/lit-html/lit-html.js";
 import page from "../../node_modules/page/page.mjs";
+import teamService from "../api/teamsService.js";
 
 const mainEl = document.querySelector("main");
 
 export default async function showDashboardPage() {
-  render(dashboardTemplate(), mainEl);
+  const teams = await teamService.getAll();
+
+  render(dashboardTemplate(teams), mainEl);
 }
 
-function dashboardTemplate() {
+function dashboardTemplate(teams) {
   return html` <section id="browse">
     <article class="pad-med">
       <h1>Team Browser</h1>
@@ -19,34 +22,20 @@ function dashboardTemplate() {
       </div>
     </article>
 
-    <article class="layout">
-      <img src="./assets/atat.png" class="team-logo left-col" />
-      <div class="tm-preview">
-        <h2>Storm Troopers</h2>
-        <p>These ARE the droids we're looking for</p>
-        <span class="details">5000 Members</span>
-        <div><a href="#" class="action">See details</a></div>
-      </div>
-    </article>
-
-    <article class="layout">
-      <img src="./assets/rocket.png" class="team-logo left-col" />
-      <div class="tm-preview">
-        <h2>Team Rocket</h2>
-        <p>Gotta catch 'em all!</p>
-        <span class="details">3 Members</span>
-        <div><a href="#" class="action">See details</a></div>
-      </div>
-    </article>
-
-    <article class="layout">
-      <img src="./assets/hydrant.png" class="team-logo left-col" />
-      <div class="tm-preview">
-        <h2>Minions</h2>
-        <p>Friendly neighbourhood jelly beans, helping evil-doers succeed.</p>
-        <span class="details">150 Members</span>
-        <div><a href="#" class="action">See details</a></div>
-      </div>
-    </article>
+    ${teams.map((team) => teamTemplate(team))}
   </section>`;
+}
+
+function teamTemplate(team) {
+  return html`
+    <article class="layout">
+      <img src=${team.logoUrl} class="team-logo left-col" />
+      <div class="tm-preview">
+        <h2>${team.name}</h2>
+        <p>${team.description}</p>
+        <span class="details">5000 Members</span>
+        <div><a href="/details/${team._id}" class="action">See details</a></div>
+      </div>
+    </article>
+  `;
 }
