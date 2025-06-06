@@ -1,5 +1,7 @@
 import { html, render } from "../../node_modules/lit-html/lit-html.js";
 import page from "../../node_modules/page/page.mjs";
+import userServices from "../api/userService.js";
+import { baseUrl } from "../constants.js";
 
 const mainEl = document.querySelector("main");
 
@@ -13,7 +15,11 @@ function registerTemplate() {
       <header class="pad-med">
         <h1>Register</h1>
       </header>
-      <form id="register-form" class="main-form pad-large">
+      <form
+        @submit=${registerUser}
+        id="register-form"
+        class="main-form pad-large"
+      >
         <div class="error">Error message.</div>
         <label>E-mail: <input type="text" name="email" /></label>
         <label>Username: <input type="text" name="username" /></label>
@@ -26,4 +32,21 @@ function registerTemplate() {
       </footer>
     </article>
   </section>`;
+}
+
+async function registerUser(e) {
+  e.preventDefault();
+  const formData = new FormData(e.currentTarget);
+  const userData = Object.fromEntries(formData);
+
+  if (userData.password !== userData.repass) {
+    return alert("passwords dont match");
+  }
+
+  try {
+    const result = await userServices.register(userData);
+    page.redirect("/profile");
+  } catch (error) {
+    alert(error.message);
+  }
 }
