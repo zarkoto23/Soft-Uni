@@ -1,19 +1,24 @@
 import { html, render } from "../../node_modules/lit-html/lit-html.js";
 import page from "../../node_modules/page/page.mjs";
+import teamService from "../api/teamsService.js";
 
 const mainEl = document.querySelector("main");
 
-export default async function showDetailsPage() {
-  render(detailsTemplate(), mainEl);
+export default async function showDetailsPage(ctx) {
+
+  const teamId=ctx.params.id
+  const team= await teamService.getById(teamId)
+
+  render(detailsTemplate(team), mainEl);
 }
 
-function detailsTemplate() {
+function detailsTemplate(team) {
   return html` <section id="team-home">
     <article class="layout">
-      <img src="./assets/rocket.png" class="team-logo left-col" />
+      <img src=${team.logoUrl} class="team-logo left-col" />
       <div class="tm-preview">
-        <h2>Team Rocket</h2>
-        <p>Gotta catch 'em all!</p>
+        <h2>${team.name}</h2>
+        <p>${team.description}</p>
         <span class="details">3 Members</span>
         <div>
           <a href="#" class="action">Edit team</a>

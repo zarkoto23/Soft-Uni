@@ -31,7 +31,9 @@ async function createTeam(e) {
 
   try {
     const result = await teamService.create(teamData);
-    page.redirect(`/details/${teamData._id}`);
+    console.log(result);
+    
+    page.redirect(`/details/${result._id}`);
   } catch (error) {
     alert(error.message);
   }
