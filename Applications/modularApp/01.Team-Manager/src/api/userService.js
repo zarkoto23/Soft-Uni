@@ -1,6 +1,6 @@
 import { get, post } from "./requester.js";
-import { baseUsersUrl } from "../constants.js";
-import { removeUserData, setUserData } from "../utils";
+import { baseUsersUrl } from "../constants.js"
+import { removeUserData, setUserData } from "../utils.js";
 
 async function register(userData) {
   const result= await post(`${baseUsersUrl}/register`,userData);
@@ -16,7 +16,7 @@ async function login(userData) {
 }
 
 async function logout(userData) {
- await get(`${baseUsersUrl}/logout`,userData);
+ await get(`${baseUsersbaUrl}/logout`,userData);
  removeUserData()
 }
 
