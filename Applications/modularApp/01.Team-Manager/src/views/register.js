@@ -1,7 +1,8 @@
 import { html, render } from "../../node_modules/lit-html/lit-html.js";
 import page from "../../node_modules/page/page.mjs";
 import userServices from "../api/userService.js";
-import { baseUrl } from "../constants.js";
+// import { baseUrl } from "../constants.js";
+import { showNavigation } from "../app.js";
 
 const mainEl = document.querySelector("main");
 
@@ -45,6 +46,8 @@ async function registerUser(e) {
 
   try {
     const result = await userServices.register(userData);
+    showNavigation();
+
     page.redirect("/profile");
   } catch (error) {
     alert(error.message);

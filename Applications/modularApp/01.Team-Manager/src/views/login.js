@@ -1,6 +1,8 @@
 import { html, render } from "../../node_modules/lit-html/lit-html.js";
 import page from "../../node_modules/page/page.mjs";
 import userServices from "../api/userService.js";
+import { showNavigation } from "../app.js";
+
 
 const mainEl = document.querySelector("main");
 
@@ -27,17 +29,16 @@ function loginTemplate() {
   </section>`;
 }
 
-async function loginUser(e){
-  e.preventDefault()
-  const formData= new FormData(e.currentTarget)
-  const userData=Object.fromEntries(formData)
-try{
-  const result=await userServices.login(userData)
+async function loginUser(e) {
+  e.preventDefault();
+  const formData = new FormData(e.currentTarget);
+  const userData = Object.fromEntries(formData);
+  try {
+    const result = await userServices.login(userData);
+    showNavigation();
 
-  page.redirect('/profile')
-}catch(error){
-  alert(error)
+    page.redirect("/profile");
+  } catch (error) {
+    alert(error);
+  }
 }
-
-}
-  

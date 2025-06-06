@@ -57,7 +57,6 @@ export async function onDelete(data){
       "Content-Type":"application/json",
       'X-Authorization':util.token
     },
-    body:JSON.stringify()
   })
 
  if (!response.ok) {

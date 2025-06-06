@@ -16,7 +16,7 @@ async function login(userData) {
 }
 
 async function logout(userData) {
- await get(`${baseUsersbaUrl}/logout`,userData);
+ await get(`${baseUsersUrl}/logout`,userData);
  removeUserData()
 }
 
