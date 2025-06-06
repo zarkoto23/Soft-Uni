@@ -1,5 +1,6 @@
 import { html, render } from "../../node_modules/lit-html/lit-html.js";
 import page from "../../node_modules/page/page.mjs";
+import teamService from "../api/teamsService.js";
 
 const mainEl = document.querySelector("main");
 
@@ -13,7 +14,7 @@ function createTemplate() {
       <header class="pad-med">
         <h1>New Team</h1>
       </header>
-      <form id="create-form" class="main-form pad-large">
+      <form @submit=${createTeam} id="create-form" class="main-form pad-large">
         <div class="error">Error message.</div>
         <label>Team name: <input type="text" name="name" /></label>
         <label>Logo URL: <input type="text" name="logoUrl" /></label>
@@ -22,4 +23,20 @@ function createTemplate() {
       </form>
     </article>
   </section>`;
+}
+
+async function createTeam(e){
+  e.preventDefault()
+  const teamData=Object.fromEntries(new FormData(e.currentTarget))
+
+  try {
+    const result= await teamService.create(teamData)
+    page.redirect(`/details/${teamData._id}`)
+
+    console.log(result);
+    
+    
+  } catch (error) {
+    alert(error.message)
+  }
 }
