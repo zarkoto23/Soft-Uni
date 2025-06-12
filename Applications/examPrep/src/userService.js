@@ -15,8 +15,9 @@ async function login(userData) {
 }
 
 async function logout() {
-  return await get(`${baseUsersUrl}/logout`);
+  const result= await get(`${baseUsersUrl}/logout`);
   removeUser();
+  return result
 }
 
 const userService = { register, login, logout };

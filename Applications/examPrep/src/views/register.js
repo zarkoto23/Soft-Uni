@@ -47,7 +47,7 @@ async function registerUser(e) {
   const userData = Object.fromEntries(new FormData(e.currentTarget));
   console.log(userData);
   if (userData.password !== userData["re-password"]) {
-    alert("passwords dont match!");
+    alert("Passwords don't match");
     return;
   }
 

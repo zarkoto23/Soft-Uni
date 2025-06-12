@@ -23,3 +23,5 @@ page("/dashboard", showDashboard);
 page("/details/:id", showDetails);
 
 page();
+
+

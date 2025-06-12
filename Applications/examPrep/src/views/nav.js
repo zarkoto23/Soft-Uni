@@ -1,5 +1,6 @@
 import { html, render } from "../../node_modules/lit-html/lit-html.js";
 import page from "../../node_modules/page/page.mjs";
+import userService from "../userService.js";
 import { getToken } from "../util.js";
 
 const mainEl = document.querySelector("header");
@@ -10,7 +11,6 @@ export default async function showNav() {
 
 function navTemplate() {
   const token = getToken();
-  console.log(token);
 
   return html`
     <a id="logo" href="/"
@@ -25,7 +25,7 @@ function navTemplate() {
         ? html`
             <div class="user">
               <a href="/create">Sell</a>
-              <a href="">Logout</a>
+              <a @click=${onLogout}>Logout</a>
             </div>
           `
         : html`
@@ -36,4 +36,14 @@ function navTemplate() {
           `}
     </nav>
   `;
+}
+
+async function onLogout(){
+  
+  try{await userService.logout()
+  page.redirect('/')
+  }catch{
+    alert('unsuccessfull logout')
+    return
+  }
 }
