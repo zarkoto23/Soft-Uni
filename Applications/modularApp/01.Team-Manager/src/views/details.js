@@ -21,7 +21,7 @@ function detailsTemplate(team) {
         <p>${team.description}</p>
         <span class="details">3 Members</span>
         <div>
-          <a href="#" class="action">Edit team</a>
+          <a href="/edit/${team._id}" class="action">Edit team</a>
           <a href="#" class="action">Join team</a>
           <a href="#" class="action invert">Leave team</a>
           Membership pending. <a href="#">Cancel request</a>
