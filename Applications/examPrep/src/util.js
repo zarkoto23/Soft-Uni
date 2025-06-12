@@ -1,5 +1,5 @@
 export function getToken(){
-  return localStorage.getItem('acessToken')
+  return localStorage.getItem('token')
 }
 
 export function getUserId(){
@@ -7,7 +7,7 @@ export function getUserId(){
 }
 
 export function setUserData(userData){
-  localStorage.setItem('token', userData.acessToken)
+  localStorage.setItem('token', userData.accessToken)
   localStorage.setItem('userId', userData._id)
   localStorage.setItem('email', userData.email)
 }

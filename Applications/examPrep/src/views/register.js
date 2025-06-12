@@ -1,5 +1,7 @@
 import { html, render } from "../../node_modules/lit-html/lit-html.js";
 import  page  from "../../node_modules/page/page.mjs";
+import userService from "../userService.js";
+import showNav from "./nav.js";
 
 const mainEl = document.querySelector("#main-element");
 
@@ -12,7 +14,7 @@ function registerTemplate() {
     <section id="register">
       <div class="form">
         <h2>Register</h2>
-        <form class="register-form">
+        <form @submit=${registerUser} class="register-form">
           <input
             type="text"
             name="email"
@@ -32,9 +34,40 @@ function registerTemplate() {
             placeholder="repeat password"
           />
           <button type="submit">register</button>
-          <p class="message">Already registered? <a href="#">Login</a></p>
+          <p class="message">Already registered? <a href="/login">Login</a></p>
         </form>
       </div>
     </section>
   `;
 }
+
+
+async function registerUser(e){
+  e.preventDefault()
+  
+  const userData=Object.fromEntries(new FormData(e.currentTarget))
+console.log(userData)
+  if(userData.password!==userData['re-password']){
+    alert('passwords dont match!')
+    return
+  }
+
+
+
+  try{const result=await userService.register(userData)
+  
+  page.redirect('/')
+  showNav()
+
+  }
+
+catch(err){
+    alert(err.message)
+    return
+
+  }
+
+
+}
+
+
