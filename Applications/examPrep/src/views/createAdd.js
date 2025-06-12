@@ -1,7 +1,7 @@
 import { html, render } from "../../node_modules/lit-html/lit-html.js";
-import { page } from "../../node_modules/page/page.mjs";
+import  page  from "../../node_modules/page/page.mjs";
 
-const mainEl = document.querySelector("#main-element");
+const mainEl = document.querySelector("main");
 
 export default async function showCreate() {
   render(createTemplate(), mainEl);
@@ -9,7 +9,6 @@ export default async function showCreate() {
 
 function createTemplate() {
   return html`
-    <!-- Create Page (Only for logged-in users) -->
     <section id="create">
       <div class="form form-item">
         <h2>Add Drone Offer</h2>

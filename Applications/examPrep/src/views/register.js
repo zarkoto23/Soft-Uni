@@ -1,15 +1,14 @@
 import { html, render } from "../../node_modules/lit-html/lit-html.js";
-import { page } from "../../node_modules/page/page.mjs";
+import  page  from "../../node_modules/page/page.mjs";
 
 const mainEl = document.querySelector("#main-element");
 
-export default async function showHome() {
+export default async function showRegister() {
   render(registerTemplate(), mainEl);
 }
 
 function registerTemplate() {
   return html`
-    <!-- Register Page (Only for Guest users) -->
     <section id="register">
       <div class="form">
         <h2>Register</h2>
