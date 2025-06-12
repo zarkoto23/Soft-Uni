@@ -1,5 +1,5 @@
 import { html, render } from "../../node_modules/lit-html/lit-html.js";
-import  page  from "../../node_modules/page/page.mjs";
+import page from "../../node_modules/page/page.mjs";
 import userService from "../userService.js";
 import showNav from "./nav.js";
 
@@ -14,7 +14,7 @@ function loginTemplate() {
     <section id="login">
       <div class="form">
         <h2>Login</h2>
-        <form @submit =${loginUser} class="login-form">
+        <form @submit=${loginUser} class="login-form">
           <input type="text" name="email" id="email" placeholder="email" />
           <input
             type="password"
@@ -32,31 +32,17 @@ function loginTemplate() {
   `;
 }
 
+async function loginUser(e) {
+  e.preventDefault();
+  const formData = new FormData(e.currentTarget);
+  const userData = Object.fromEntries(formData);
 
-async function loginUser(e){
-  e.preventDefault()
-  const formData=new FormData(e.currentTarget)
-  const userData=Object.fromEntries(formData)
+  try {
+    const result = await userService.login(userData);
 
-
-
-  try{const result=await userService.login(userData)
-
-    
-
-  if(!result.ok){
-    const eror=result.json()
-    alert(eror.message)
-    return
+    page.redirect("/");
+  } catch (err) {
+    alert(err.message);
+    return;
   }
-page.redirect('/')
-showNav()
-}catch(err){
-    alert(err.message)
-    return
-  }
-
-
 }
-  
-

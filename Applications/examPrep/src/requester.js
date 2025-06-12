@@ -6,39 +6,34 @@ async function request(method, url, data) {
     headers: {},
   };
 
-  const token=getToken()
+  const token = getToken();
 
-  if(token){
-    options.headers['X-Authorization']=token
+  if (token) {
+    options.headers["X-Authorization"] = token;
   }
-  if(data){
-    options.headers['Content-Type']='application/json'
-    options.body=JSON.stringify(data)
+  if (data) {
+    options.headers["Content-Type"] = "application/json";
+    options.body = JSON.stringify(data);
   }
 
   try {
-    const response=await fetch(url, options)
-    if(!response.ok){
-      const error=await response.json()
-      throw new Error(error.message)
+    const response = await fetch(url, options);
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message);
     }
-    if(response.status===204){
-      return response
+    if (response.status === 204) {
+      return response;
     }
-    const result=await response.json()
-    return result
-    
+    const result = await response.json();
+    return result;
   } catch (error) {
-    throw error
+    throw error;
     // alert(error.message)
   }
-
-
 }
 
-export const get=(url)=>request('GET', url)
-export const post=(url,data)=>request('POST', url,data)
-export const put=(url,data)=>request('PUT', url,data)
-export const del=(url)=>request('DELETE', url)
-
-
+export const get = (url) => request("GET", url);
+export const post = (url, data) => request("POST", url, data);
+export const put = (url, data) => request("PUT", url, data);
+export const del = (url) => request("DELETE", url);

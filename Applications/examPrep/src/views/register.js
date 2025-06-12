@@ -1,5 +1,5 @@
 import { html, render } from "../../node_modules/lit-html/lit-html.js";
-import  page  from "../../node_modules/page/page.mjs";
+import page from "../../node_modules/page/page.mjs";
 import userService from "../userService.js";
 import showNav from "./nav.js";
 
@@ -41,33 +41,22 @@ function registerTemplate() {
   `;
 }
 
+async function registerUser(e) {
+  e.preventDefault();
 
-async function registerUser(e){
-  e.preventDefault()
-  
-  const userData=Object.fromEntries(new FormData(e.currentTarget))
-console.log(userData)
-  if(userData.password!==userData['re-password']){
-    alert('passwords dont match!')
-    return
+  const userData = Object.fromEntries(new FormData(e.currentTarget));
+  console.log(userData);
+  if (userData.password !== userData["re-password"]) {
+    alert("passwords dont match!");
+    return;
   }
 
+  try {
+    const result = await userService.register(userData);
 
-
-  try{const result=await userService.register(userData)
-  
-  page.redirect('/')
-  showNav()
-
+    page.redirect("/");
+  } catch (err) {
+    alert(err.message);
+    return;
   }
-
-catch(err){
-    alert(err.message)
-    return
-
-  }
-
-
 }
-
-
