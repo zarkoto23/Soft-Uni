@@ -19,3 +19,6 @@ function fun(arr) {
  
  }
  fun(([14, 24, 3, 19, 15, 17]))
+
+
+ //tst
