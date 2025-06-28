@@ -1,1 +1,12 @@
 Applications/rendering/06.Book-Library/06.Book-Library.zip
+
+
+node_modules/
+server/
+test/
+tests/
+
+*.zip
+*.rar
+*.docx
+
