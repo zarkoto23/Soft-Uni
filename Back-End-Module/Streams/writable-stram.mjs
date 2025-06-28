@@ -1,7 +1,7 @@
 import { createWriteStream } from "fs";
 
 
-const writeStream=createWriteStream('./output.txt',{encoding: 'utf-8',flags:'a'})
+const writeStream=createWriteStream('./output.txt',{flags:'a'})
 writeStream.write(`sdfhsdfhsddf
 gfgsdfgsdfgsdfgsdfgsdfgsdfgdfgGGGGGGGGGG
 sdfhgsdfg`)
