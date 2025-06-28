@@ -22,7 +22,9 @@ export default`<!DOCTYPE html>
         <h1>Cat Shelter</h1>
     </header>
     <main>
-        <form action="#" method="" class="cat-form" enctype="multipart/form-data">
+
+        <form action="/cats/add-cat" method="POST" class="cat-form">
+
             <h2>Add Cat</h2>
             <label for="name">Name</label>
             <input name="name" type="text" id="name">
@@ -30,7 +32,7 @@ export default`<!DOCTYPE html>
             <textarea name="description" id="description"></textarea>
             <label for="image">Image</label>
             <input name="imageUrl" type="text" id="image">
-            
+
 
             <label for="group">Breed</label>
             <select name="breed" id="group">

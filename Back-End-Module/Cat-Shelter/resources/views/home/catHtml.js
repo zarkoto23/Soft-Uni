@@ -1,7 +1,7 @@
    export default (cat)=>` <li>
-                    <img src="https://cdn.pixabay.com/photo/2014/04/13/20/49/cat-323262_1280.jpg" alt="Black Cat">
-                    <h3>Pretty Kitty</h3>
-                    <p><span>Breed: </span>Bombay Cat</p>
+                    <img src=${cat.imageUrl} alt="Black Cat">
+                    <h3>${cat.name}</h3>
+                    <p><span>Breed: </span>${cat.breed}</p>
                     <p><span>Description: </span>${cat.description}</p>
                     <ul class="buttons">
                         <li class="btn edit"><a href="">Change Info</a></li>

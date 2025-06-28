@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "imageUrl": "https://media.istockphoto.com/id/1443562748/photo/cute-ginger-cat.jpg?s=612x612&w=0&k=20&c=vvM97wWz-hMj7DLzfpYRmY2VswTqcFEKkC437hxm3Cg=",
+    "name": "Pretty Kitty",
+    "breed": "Bombay Cat",
+    "description": "Dominant and aggressive to other cats. Will probably eat you in your sleep. Very cute tho."
+  },
+  {
+    "id": 2,
+    "imageUrl": "https://media.istockphoto.com/id/1443562748/photo/cute-ginger-cat.jpg?s=612x612&w=0&k=20&c=vvM97wWz-hMj7DLzfpYRmY2VswTqcFEKkC437hxm3Cg=",
+    "name": "Navo",
+    "breed": "Persian Cat",
+    "description": "A talkative and affectionate cat with striking yellow eyes."
+  },
+  {
+    "id": 3,
+    "imageUrl": "https://m.netinfo.bg/media/images/29499/29499472/640-420-grumpy-cat-v-london-goliamoto-svetsko-sybitie-sled-rozhdeniia-den.jpg",
+    "name": "Sisa",
+    "breed": "Siamese Cat",
+    "description": "Loves to cuddle and nap. Requires regular grooming for its luxurious coat."
+  },
+  {
+    "id": 4,
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS0IQhVr9DDJCq61QX28zCoiqDrvezBh5ylw&s",
+    "name": "Garry",
+    "breed": "Bombay Cat",
+    "description": "Mysterious and elegant. Often found lounging in sunny spots."
+  },
+  {
+    "id": "d4132e8f-f6b3-4343-a32e-bcb4f73c2958",
+    "name": "sdssss",
+    "description": "sssss",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJ-FsHeOkXoUn2CfFdPEmFV1Iuzv98XrAr2Q&s",
+    "breed": "Fluffy Cat"
+  },
+  {
+    "id": "a446890c-5e14-4893-b511-a397d4252244",
+    "name": "aaa",
+    "description": "aaaaa",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGiMRWnGc5cBoV_Oylh9iKi99VK7QWUyHftg&s",
+    "breed": "Fluffy Cat"
+  },
+  {
+    "id": "7d686d07-692a-4595-a64f-cd19ca625965",
+    "name": "ххх",
+    "description": "ххх",
+    "imageUrl": "ххх",
+    "breed": "Fluffy Cat"
+  },
+  {
+    "id": "9c0bbcf8-c298-461e-bd74-79ee036a9cb7",
+    "name": "ттт",
+    "description": "ттт",
+    "imageUrl": "ттт",
+    "breed": "Fluffy Cat"
+  },
+  {
+    "id": "3156e896-dff4-4ab7-a595-aebe84a10313",
+    "name": "ссс",
+    "description": "ссс",
+    "imageUrl": "ссс",
+    "breed": "Fluffy Cat"
+  }
+]

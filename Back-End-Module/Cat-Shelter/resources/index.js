@@ -1,48 +1,52 @@
 import http from "http";
+import {v4 as uuid} from 'uuid'
+import fs from 'fs/promises'
+
+
 import style from "./content/styles/site.css.js";
 import homeIndex from "./views/home/index.html.js";
 import addBreed from "./views/addBreed.html.js";
 import addCat from "./views/addCat.html.js";
 
-  const cats = [
-  {
-    id: 1,
-    imageUrl:
-      "https://media.istockphoto.com/id/1443562748/photo/cute-ginger-cat.jpg?s=612x612&w=0&k=20&c=vvM97wWz-hMj7DLzfpYRmY2VswTqcFEKkC437hxm3Cg=",
-    name: "Pretty Kitty",
-    breed: "Bombay Cat",
-    description:
-      "Dominant and aggressive to other cats. Will probably eat you in your sleep. Very cute tho.",
-  },
-  {
-    id: 2,
-    imageUrl:
-      "https://media.istockphoto.com/id/1443562748/photo/cute-ginger-cat.jpg?s=612x612&w=0&k=20&c=vvM97wWz-hMj7DLzfpYRmY2VswTqcFEKkC437hxm3Cg=",
-    name: "Navcho",
-    breed: "Persian Cat",
-    description: "A talkative and affectionate cat with striking yellow eyes.",
-  },
-  {
-    id: 3,
-    imageUrl:
-      "https://media.istockphoto.com/id/1443562748/photo/cute-ginger-cat.jpg?s=612x612&w=0&k=20&c=vvM97wWz-hMj7DLzfpYRmY2VswTqcFEKkC437hxm3Cg=",
-    name: "Sisa",
-    breed: "Siamese Cat",
-    description:
-      "Loves to cuddle and nap. Requires regular grooming for its luxurious coat.",
-  },
-  {
-    id: 4,
-    imageUrl:
-      "https://media.istockphoto.com/id/1443562748/photo/cute-ginger-cat.jpg?s=612x612&w=0&k=20&c=vvM97wWz-hMj7DLzfpYRmY2VswTqcFEKkC437hxm3Cg=",
-    name: "Garry",
-    breed: "Bombay Cat",
-    description: "Mysterious and elegant. Often found lounging in sunny spots.",
-  },
-];
 
-http
+let cats=[]
+
+ initCats()
+
+const server=http
   .createServer((req, res) => {
+
+ 
+
+    if(req.method==='POST'){
+      let body=''
+          req.on('data',chunk=>{
+            
+            body+=chunk.toString()
+            
+          })    
+          req.on('end',()=>{
+          
+            const data=new URLSearchParams(body)
+
+            cats.push({
+              // id: cats.length+1,
+              id:uuid(),
+              ...Object.fromEntries(data.entries())
+            })
+
+            saveCats()
+
+
+            res.writeHead(302, {
+              'location':'/'
+            })
+            res.end()
+          })
+          return
+    }
+
+
     if (req.url.endsWith(".css")) {
       res.writeHead(200, ["content-type", "text/css"]);
 
@@ -65,7 +69,20 @@ http
     res.write("KON");
     res.end();
   })
-  .listen(3000);
+
+
+     async function initCats(){
+
+      const catJson=await fs.readFile('./cats.json',{encoding:'utf-8'})
+      cats=JSON.parse(catJson)
+}
+
+async function saveCats(){
+  const catJson=JSON.stringify(cats,null, 2)
+  await fs.writeFile('./cats.json',catJson,{encoding:'utf-8'})
+}
+
+  server.listen(3000);
   console.log('server listen!');
   
 
