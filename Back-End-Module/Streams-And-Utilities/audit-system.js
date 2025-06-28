@@ -1,6 +1,6 @@
-import msgBroker from "./msg-broker.js";
+import eventEmiiter from "./msg-broker.js";
 
-msgBroker.subscribe('userCreated',userCreated)
+eventEmiiter.on('userCreated',userCreated)
 
 function userCreated(userData){
 console.log(`audit sys: ${userData}`);

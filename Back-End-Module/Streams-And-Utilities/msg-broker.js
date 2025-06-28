@@ -1,27 +1,5 @@
+import events from 'events'
 
-const events={
-    
+const eventEmiiter=new events.EventEmitter()
 
-}
-
- function subscribe(evName,handler ){
-    
-    if(!events[evName]){
-        events[evName]=[]
-    }
-
-    events[evName].push(handler)
-
-}
-
-function pubEmitter(evName,data){
-    events[evName].forEach(elementHandler => {
-        elementHandler(data)
-    });
-}
-
-
-export default {
-    subscribe,
-    pubEmitter
-}
+export default eventEmiiter
