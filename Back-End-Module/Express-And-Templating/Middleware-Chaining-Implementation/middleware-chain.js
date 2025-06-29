@@ -12,8 +12,9 @@ function execute(req, res) {
       return;
     }
 
-    middlewares[index](req, res);
-    index++;
+    middlewares[index++](req, res, next);
   };
   next();
 }
+
+export default { use, execute };
