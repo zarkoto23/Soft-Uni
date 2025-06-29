@@ -2,6 +2,10 @@ import express from "express";
 import path from "path";
 
 const app = express();
+
+app.use(express.static('public'))
+
+
 //aplication middlewara
 app.use((req, res, next) => {
   console.log(req.url);
@@ -56,22 +60,22 @@ app.get("/redirect", (req, res) => {
   }
 });
 
-// app.get("/download", (req, res) => {
-//   res.download("./cattt.jpg");
-// });
+app.get("/download", (req, res) => {
+  res.download("./public/cattt.jpg");
+});
 
-// app.get("/download2", (req, res) => {
-//   res.sendFile(path.resolve("./cattt.jpg"), {
-//     headers: {
-//       "content-disposition": "attachment",
-//     },
-//   });
-// });
+app.get("/download2", (req, res) => {
+  res.sendFile(path.resolve("./public/cattt.jpg"), {
+    headers: {
+      "content-disposition": "attachment",
+    },
+  });
+});
 
-// app.get("/download3", (req, res) => {
-//   res.attachment("./cattt.jpg");
-//   res.end();
-// });
+app.get("/download3", (req, res) => {
+  res.attachment("./public/cattt.jpg");
+  res.end();
+});
 
 app.get("/auth/profile", (req, res) => {
   res.send("laplap");
