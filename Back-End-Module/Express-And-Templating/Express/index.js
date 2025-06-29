@@ -6,9 +6,7 @@ server.get('/', (req, res)=>{
     console.log('request---');
 
 
-    res.write('hello maaf')
-
-    res.end()
+    res.send('<h1>helloW from sve</h1>')
 
     
     
