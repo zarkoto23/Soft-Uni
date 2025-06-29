@@ -1,17 +1,19 @@
 import exepress from 'express'
 
-const server=exepress()
+const app=exepress()
 
-server.get('/', (req, res)=>{
-    console.log('request---');
+app.get('/', (req, res)=>{
 
-
-    res.send('<h1>helloW from sve</h1>')
-
-    
+    res.send('<h1>helloW from sve</h1>') 
     
 })
 
+app.get('/cats',(req,res)=>{
+    res.send('<h1>Meow from cats</h1>')
+})
 
-server.listen(3000)
-console.log('Listening on http://localhost:3000');
+
+
+
+
+app.listen(3000, ()=>console.log('hellow from Xpress'))
