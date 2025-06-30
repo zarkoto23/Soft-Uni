@@ -25,6 +25,10 @@ app.get('/',(req, res)=>{
     res.render('about')
  })
 
+ app.get('*',(req, res)=>{
+    res.render('404')
+ })
+
 
 
 
