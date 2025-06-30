@@ -3,6 +3,12 @@ import movieService from "../services/movieService.js";
 
 const movieControllerRouter=Router()
 
+movieControllerRouter.get('/search',(req, res)=>{
+
+    const movies=movieService.getAll()
+    res.render('search',{movies})
+})
+
 
 
 movieControllerRouter.get('/create',(req,res)=>{

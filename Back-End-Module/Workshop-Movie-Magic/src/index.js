@@ -12,7 +12,7 @@ app.engine(
     extname: "hbs",
     helpers:{
       showRating
-    }
+    },
   })
 );
 app.set("view engine", "hbs");
