@@ -7,7 +7,7 @@ import { Router } from 'express'
 const routes= Router()
 
 routes.use(homeController)
-routes.use(movieControllerRouter)
+routes.use('/movies',movieControllerRouter)
 
 
 
