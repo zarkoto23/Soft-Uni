@@ -10,8 +10,8 @@ app.engine(
   "hbs",
   handlebars.engine({
     extname: "hbs",
-    helpers:{
-      showRating
+    helpers: {
+      showRating,
     },
   })
 );
@@ -19,9 +19,9 @@ app.set("view engine", "hbs");
 app.set("views", "./src/views");
 
 app.use("/static", express.static("src/public"));
-app.use(express.urlencoded({extended:false}))//learn xpres to parse form data
+app.use(express.urlencoded({ extended: false })); //learn xpres to parse form data
 //
-app.use(routes)/////
+app.use(routes); /////
 
 //
 

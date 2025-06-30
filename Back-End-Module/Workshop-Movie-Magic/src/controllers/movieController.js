@@ -1,39 +1,32 @@
 import { Router } from "express";
 import movieService from "../services/movieService.js";
 
-const movieControllerRouter=Router()
+const movieControllerRouter = Router();
 
-movieControllerRouter.get('/search',(req, res)=>{
+movieControllerRouter.get("/search", (req, res) => {
+  const filter = req.query;
 
-    const filter=req.query
+  const movies = movieService.getAll(filter);
+  res.render("search", { movies, filter });
+});
 
-    const movies=movieService.getAll(filter)
-    res.render('search',{movies, filter})
-})
+movieControllerRouter.get("/create", (req, res) => {
+  res.render("create");
+});
 
+movieControllerRouter.post("/create", (req, res) => {
+  const newMovie = req.body;
 
+  movieService.create(newMovie);
 
-movieControllerRouter.get('/create',(req,res)=>{
-    res.render('create')
-})
+  res.redirect("/");
+});
 
-movieControllerRouter.post('/create',(req, res)=>{
-    const newMovie=req.body
+movieControllerRouter.get("/:movieId/details", (req, res) => {
+  const movieId = req.params.movieId;
+  const movie = movieService.findOne(movieId);
 
-    movieService.create(newMovie)
+  res.render("details", { movie });
+});
 
-    res.redirect('/')
-    
-})
-
-
-movieControllerRouter.get('/:movieId/details',(req, res)=>{
-    const movieId=req.params.movieId
-    const movie=movieService.findOne(movieId)
-
-    res.render('details',{movie})
-})
-
-
-
-export default movieControllerRouter
+export default movieControllerRouter;
