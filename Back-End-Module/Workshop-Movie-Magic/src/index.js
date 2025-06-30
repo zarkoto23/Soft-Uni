@@ -1,38 +1,30 @@
-import express from 'express'
-import handlebars from 'express-handlebars'
+import express from "express";
+import handlebars from "express-handlebars";
 
-const app=express()
+import homeController from "./controllers/homeController.js";
+
+const app = express();
 //
-app.engine('hbs',handlebars.engine({
-    extname:'hbs',
-}))
-app.set('view engine','hbs')
-app.set('views',"./src/views")
+app.engine(
+  "hbs",
+  handlebars.engine({
+    extname: "hbs",
+  })
+);
+app.set("view engine", "hbs");
+app.set("views", "./src/views");
 
-app.use('/static',express.static('src/public'))
+app.use("/static", express.static("src/public"));
 //
 
-
-
+app.use(homeController);
 
 //
-app.get('/',(req, res)=>{
-    res.render('home')
-})
- //
 
- app.get('/about',(req,res)=>{
-    res.render('about')
- })
+app.get("*", (req, res) => {
+  res.render("404");
+});
 
- app.get('*',(req, res)=>{
-    res.render('404')
- })
-
-
-
-
-
-
-
-app.listen(3000,() =>{console.log('listen on http://localhost:3000')});
+app.listen(3000, () => {
+  console.log("listen on http://localhost:3000");
+});
