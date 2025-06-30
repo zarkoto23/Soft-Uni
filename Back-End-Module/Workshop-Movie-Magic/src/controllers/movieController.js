@@ -7,4 +7,7 @@ movieControllerRouter.get('/create',(req,res)=>{
 })
 
 
+movieControllerRouter.get('/:movieId/details',(req, res)=>{
+    res.render('details')
+})
 export default movieControllerRouter
