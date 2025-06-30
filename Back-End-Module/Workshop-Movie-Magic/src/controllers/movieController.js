@@ -9,14 +9,18 @@ movieControllerRouter.get('/create',(req,res)=>{
     res.render('create')
 })
 
+movieControllerRouter.post('/create',(req, res)=>{
+    console.log(req.body);
+    res.end()
+    
+})
+
 
 movieControllerRouter.get('/:movieId/details',(req, res)=>{
     const movieId=req.params.movieId
     const movie=movieService.findOne(movieId)
-console.log(movie);
 
-
-    res.render('details')
+    res.render('details',{movie})
 })
 
 
