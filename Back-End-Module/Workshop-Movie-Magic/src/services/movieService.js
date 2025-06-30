@@ -25,8 +25,23 @@ create(movieData){
 
 },
 
-getAll(){
-   return movies
+getAll(filter={}){
+
+   let result=movies
+   if(filter.search){
+      result=result.filter(movie=>movie.title.toLocaleLowerCase().includes(filter.search.toLocaleLowerCase()))
+   }
+
+   if(filter.genre){
+      result=result.filter(movie=>movie.genre.toLowerCase()==filter.genre)
+   }
+
+   if(filter.year){
+      result=result.filter(movie=>movie.year==filter.year)
+   }
+
+
+   return result
 }
 
 
