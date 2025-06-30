@@ -1,12 +1,30 @@
 import movies from "../movies.js";
+import {v4 as uuid} from 'uuid'
 
- function findOne(movieId){
-const result=movies.find(movie=>movie.id==movieId)
-return result
-}
 
 
 export default {
-   findOne
+   findOne(movieId){
+const result=movies.find(movie=>movie.id==movieId)
+return result
+},
+
+create(movieData){
+
+   const newId=uuid()
+
+   //TODO: Add IDs
+   movies.push({
+      id:newId,
+      ...movieData,
+   })
+   return newId
+
+},
+
+getAll(){
+   return movies
+}
+
 
 }

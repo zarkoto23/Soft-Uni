@@ -10,8 +10,11 @@ movieControllerRouter.get('/create',(req,res)=>{
 })
 
 movieControllerRouter.post('/create',(req, res)=>{
-    console.log(req.body);
-    res.end()
+    const newMovie=req.body
+
+    movieService.create(newMovie)
+
+    res.redirect('/')
     
 })
 
