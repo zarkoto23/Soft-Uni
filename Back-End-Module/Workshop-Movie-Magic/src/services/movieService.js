@@ -17,7 +17,10 @@ create(movieData){
    movies.push({
       id:newId,
       ...movieData,
+      rating:Number(movieData.rating),
    })
+   console.log('created');
+   
    return newId
 
 },
