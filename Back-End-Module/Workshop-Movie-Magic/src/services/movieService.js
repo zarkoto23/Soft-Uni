@@ -1,9 +1,11 @@
 import movies from "../movies.js";
-import { v4 as uuid } from "uuid";
+// import { v4 as uuid } from "uuid";
+import Movie from "../models/Movie.js";
 
 export default {
-  findOne(movieId) {
-    const result = movies.find((movie) => movie.id == movieId);
+  async getOne(movieId) {
+    const result = await Movie.findById(movieId);
+
     return result;
   },
 
@@ -21,26 +23,28 @@ export default {
     return newId;
   },
 
-  getAll(filter = {}) {
-    let result = movies;
-    if (filter.search) {
-      result = result.filter((movie) =>
-        movie.title
-          .toLocaleLowerCase()
-          .includes(filter.search.toLocaleLowerCase())
-      );
-    }
+   getAll(filter = {}) {
+    let result =  Movie.find({})
 
-    if (filter.genre) {
-      result = result.filter(
-        (movie) => movie.genre.toLowerCase() == filter.genre
-      );
-    }
 
-    if (filter.year) {
-      result = result.filter((movie) => movie.year == filter.year);
-    }
+    // if (filter.search) {
+    //   result = result.filter((movie) =>
+    //     movie.title
+    //       .toLocaleLowerCase()
+    //       .includes(filter.search.toLocaleLowerCase())
+    //   );
+    // }
 
-    return result;
+    // if (filter.genre) {
+    //   result = result.filter(
+    //     (movie) => movie.genre.toLowerCase() == filter.genre
+    //   );
+    // }
+
+    // if (filter.year) {
+    //   result = result.filter((movie) => movie.year == filter.year);
+    // }
+
+    return Movie.find({});
   },
 };
