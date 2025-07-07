@@ -18,6 +18,11 @@ const studentSchema = new mongoose.Schema({
   age: Number,
 });
 
+//create custom method
+studentSchema.methods.getInfo=function(){
+  return `im ${this.name}, and im ${this.age}`
+}
+
 //create mongoose model
 const Student = mongoose.model("Student", studentSchema,'students');
 
@@ -42,6 +47,13 @@ const students = await Student.find();
 //   name:"Niki",
 //   age: 19
 // })
-console.log(await Student.find({age:19}));
+// console.log(await Student.find({age:19}));
+
+//using model custom method
+//get one singel student
+const singleStudent=await Student.findOne({age:21})
+console.log(singleStudent.getInfo());
+
+
 
 
