@@ -102,5 +102,21 @@ const students = await Student.find();
 
 // console.log(one.getInfo());
 
+// await Student.deleteOne({'name':'Ivaylo'})
+
+// mongoDBquery with operator $or
+// const resulsStudents=await Student.find({
+//   $or:[
+//     {name:'Pesho'},
+//     {age:{$lt: 10}}
+//   ]
+// })
+
+//Mongoose operator
+
+const resulsStudents=await Student.find()
+.where('age').gt(17).lt(20)
+// .select({name:1,_id:0})
+console.log(resulsStudents);
 
  
