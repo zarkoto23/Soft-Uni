@@ -14,7 +14,7 @@ export default {
 
     //TODO: Add IDs
     movies.push({
-      id: newId,
+      // id: newId,
       ...movieData,
       rating: Number(movieData.rating),
     });
@@ -24,27 +24,21 @@ export default {
   },
 
    getAll(filter = {}) {
-    let result =  Movie.find({})
+    let query =  Movie.find({})
 
 
-    // if (filter.search) {
-    //   result = result.filter((movie) =>
-    //     movie.title
-    //       .toLocaleLowerCase()
-    //       .includes(filter.search.toLocaleLowerCase())
-    //   );
-    // }
+    if (filter.search) {
+      query = query.where({title: filter.search}) //TODO: create partial search case insensitive
+    }
 
-    // if (filter.genre) {
-    //   result = result.filter(
-    //     (movie) => movie.genre.toLowerCase() == filter.genre
-    //   );
-    // }
+    if (filter.genre) {
+      query = query.where({genre: filter.genre})//TODO: add case insesituve
+    }
 
-    // if (filter.year) {
-    //   result = result.filter((movie) => movie.year == filter.year);
-    // }
+    if (filter.year) {
+      query = query.where({year: Number(filter.year)});
+    }
 
-    return Movie.find({});
+    return query
   },
 };
