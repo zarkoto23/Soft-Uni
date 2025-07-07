@@ -25,10 +25,15 @@ const studentSchema = new mongoose.Schema({
 
 });
 
+// studentSchema.method('getInfo',function(){
+//   return `im ${this.name} and im ${this.age}`
+// })
+
+
 //create custom method
-studentSchema.methods.getInfo=function(){
-  return `im ${this.name}, and im ${this.age}`
-}
+// studentSchema.methods.getInfo=function(){
+//   return `im ${this.name}, and im ${this.age}`
+// }
 
 //create mongoose model
 const Student = mongoose.model("Student", studentSchema,'students');
@@ -58,11 +63,15 @@ const students = await Student.find();
 // await newStudent.save()
 
 
-// const createdStudent=await Student.create({
+// try{await Student.create({
 
 //   name:"Niki",
-//   age: 19
+//   age: 190
 // })
+// }catch(err){
+//   console.log(err.message);
+  
+// }
 // console.log(await Student.find({age:19}));
 
 //using model custom method
@@ -73,12 +82,25 @@ const students = await Student.find();
 
 
 
-try{
-  await Student.create({
-  name:'test1',
-  age:122
-})
-}catch(err){
-  console.log(err.message);
+// try{
+//   await Student.create({
+//   name:'test1',
+//   age:122
+// })
+// }catch(err){
+//   console.log(err.message);
   
-}
+// }
+
+// await Student.updateOne({name:'Ivo',age:24},{name:"Ivaylo",age:29})
+
+// await Student.deleteMany({age:-1})
+
+
+
+// const one=await Student.findOne({age:29})
+
+// console.log(one.getInfo());
+
+
+ 
