@@ -15,7 +15,14 @@ try {
 
 const studentSchema = new mongoose.Schema({
   name: String,
-  age: Number,
+  age: {
+    type:Number,
+    require:true,
+     min:[18,'should be more than 18'] ,
+    max:[120,'should be less than 120']
+  },
+ 
+
 });
 
 //create custom method
@@ -25,6 +32,15 @@ studentSchema.methods.getInfo=function(){
 
 //create mongoose model
 const Student = mongoose.model("Student", studentSchema,'students');
+
+
+//custom validation
+// studentSchema.path('age').validate(function(age){
+//   console.log(age);
+//   return age>=18&&age<=120
+  
+// })
+
 
 //query all data from db
 
@@ -51,9 +67,18 @@ const students = await Student.find();
 
 //using model custom method
 //get one singel student
-const singleStudent=await Student.findOne({age:21})
-console.log(singleStudent.getInfo());
+// const singleStudent=await Student.findOne({age:21})
+// console.log(singleStudent.getInfo());
 
 
 
 
+try{
+  await Student.create({
+  name:'test1',
+  age:122
+})
+}catch(err){
+  console.log(err.message);
+  
+}
