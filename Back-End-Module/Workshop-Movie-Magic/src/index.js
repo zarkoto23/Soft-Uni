@@ -9,7 +9,7 @@ const app = express();
 
 //Db config
 try{
-  const uri='mongodb://localhost:27017/magic-movies'
+  const uri='mongodb://localhost:27017/movie-magic'
   await mongoose.connect(uri)
   console.log('conected success on DB');
   
@@ -57,4 +57,5 @@ app.get("*", (req, res) => {
 
 app.listen(3000, () => {
   console.log("listen on http://localhost:3000");
+
 });
