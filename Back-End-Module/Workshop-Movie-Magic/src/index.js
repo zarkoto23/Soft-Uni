@@ -1,6 +1,7 @@
 import express from "express";
 import handlebars from "express-handlebars";
 import mongoose, { mongo } from 'mongoose'
+import cookieParser from "cookie-parser";
 
 import routes from "../routes.js";
 import showRating from "./helpers/ratingHelper.js";
@@ -42,6 +43,7 @@ app.set("views", "./src/views");
 //express config
 app.use("/static", express.static("src/public"));
 app.use(express.urlencoded({ extended: false })); //learn xpres to parse form data
+app.use(cookieParser)
 //
 
 

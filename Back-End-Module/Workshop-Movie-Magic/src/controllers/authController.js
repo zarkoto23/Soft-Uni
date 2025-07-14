@@ -10,7 +10,7 @@ authController.get('/register',(req, res)=>{
 authController.post('/register',async(req,res)=>{
     const userData=req.body
     await authService.register(userData)
-    res.redirect('/login')
+    res.redirect('/auth/login')
     
 })
 
@@ -22,6 +22,7 @@ authController.post('/login',async(req, res)=>{
     const {email, password}=req.body
    try{
     const token= await authService.login(email, password)
+    
    }catch(err){
     
     return
