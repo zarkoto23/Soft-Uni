@@ -16,7 +16,7 @@ movieControllerRouter.get("/create", (req, res) => {
 });
 
 movieControllerRouter.post("/create", async (req, res) => {
-  const newMovie = req.body;
+  // const newMovie = req.body;
 
  await movieService.create(newMovie);
 
@@ -24,6 +24,11 @@ movieControllerRouter.post("/create", async (req, res) => {
 });
 
 movieControllerRouter.get("/:movieId/details",async (req, res) => {
+
+  console.log(req.user);
+  
+
+
   const movieId = req.params.movieId;
   const movie = await movieService.getOneWithCasts(movieId);
   

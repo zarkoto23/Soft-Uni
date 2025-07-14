@@ -24,6 +24,7 @@ authController.post("/login", async (req, res) => {
     res.cookie("auth", token);
     res.redirect("/");
   } catch (err) {
+    
     res.redirect("/404");
   }
 });

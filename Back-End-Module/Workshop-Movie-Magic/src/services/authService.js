@@ -1,10 +1,11 @@
 import  jwt  from "jsonwebtoken"
 import User from "../models/User.js"
 import bcrypt from 'bcrypt'
+import 'dotenv/config.js'
 
 
 
-const SECRET='asjkh5jkah4aw54wjh5asjkhr'
+const SECRET=process.env.JWT_SECRET || 'BASICSECRET'
 
 export default{
 
@@ -34,11 +35,11 @@ export default{
         const payload={
             id:user._id,
             email:user.email,
-
-
         }
 
+
         //todo: refactor to use async option
+        
         const token=jwt.sign({payload},SECRET,{expiresIn: '2h'})
         return token
 

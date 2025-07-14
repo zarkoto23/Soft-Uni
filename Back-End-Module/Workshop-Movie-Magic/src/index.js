@@ -2,8 +2,10 @@ import express from "express";
 import handlebars from "express-handlebars";
 import mongoose, { mongo } from 'mongoose'
 import cookieParser from "cookie-parser";
+import 'dotenv/config.js'
 
 import routes from "../routes.js";
+import { authMiddleware } from "./middlewares/authMiddleware.js";
 import showRating from "./helpers/ratingHelper.js";
 
 const app = express();
@@ -44,6 +46,7 @@ app.set("views", "./src/views");
 app.use("/static", express.static("src/public"));
 app.use(express.urlencoded({ extended: false })); //learn xpres to parse form data
 app.use(cookieParser())
+app.use(authMiddleware)
 //
 
 
