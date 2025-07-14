@@ -1,38 +1,26 @@
-import  jwt  from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 
-const SECRET = process.env.JWT_SECRET ||'BASICSECRET'
+const SECRET = process.env.JWT_SECRET || "BASICSECRET";
 
+export const authMiddleware = (req, res, next) => {
+  //get token
+  const token = req.cookies["auth"];
+  if (!token) {
+    //if guest
+    return next();
+  }
 
-
-export const authMiddleware=(req, res, next)=>{
-    //get token
-    const token=req.cookies['auth']
-    if(!token){
-        //if guest
-        return next()
-
-    }
-    
-
-
-    //validate token
-    try {
-        const decodedToken=jwt.verify(token, SECRET)
+  //validate token
+  try {
+    const decodedToken = jwt.verify(token, SECRET);
     //attach decoded token to request
-    req.user=decodedToken
+    req.user = decodedToken;
 
-    next()
+    next();
+  } catch (error) {
+    //todo: invalid token
+    res.clearCookie("auth");
 
-        
-    } catch (error) {
-        //todo: invalid token
-        res.clearCookie('auth')
-
-        res.redirect('/auth/login')
-
-    }
-
-
-
-
-}
+    res.redirect("/auth/login");
+  }
+};

@@ -40,7 +40,8 @@ export default{
 
         //todo: refactor to use async option
         
-        const token=jwt.sign({payload},SECRET,{expiresIn: '2h'})
+        const token = jwt.sign(payload, SECRET, { expiresIn: '2h' });
+
         return token
 
 
