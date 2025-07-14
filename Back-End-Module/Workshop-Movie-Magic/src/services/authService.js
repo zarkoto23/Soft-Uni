@@ -1,6 +1,10 @@
+import  jwt  from "jsonwebtoken"
 import User from "../models/User.js"
 import bcrypt from 'bcrypt'
 
+
+
+const SECRET='asjkh5jkah4aw54wjh5asjkhr'
 
 export default{
 
@@ -25,6 +29,20 @@ export default{
         if(!isValid){
             throw new Error('invalid pass')
         }
+
+        //generate token
+        const payload={
+            id:user._id,
+            email:user.email,
+
+
+        }
+
+        //todo: refactor to use async option
+        const token=jwt.sign({payload},SECRET,{expiresIn: '2h'})
+        return token
+
+
     },
      
 }
