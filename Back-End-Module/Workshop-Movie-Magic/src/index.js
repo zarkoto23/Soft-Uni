@@ -43,7 +43,7 @@ app.set("views", "./src/views");
 //express config
 app.use("/static", express.static("src/public"));
 app.use(express.urlencoded({ extended: false })); //learn xpres to parse form data
-app.use(cookieParser)
+app.use(cookieParser())
 //
 
 
