@@ -66,4 +66,8 @@ movieControllerRouter.get('/:movieId/delete',async (req, res)=>{
   
 })
 
+movieControllerRouter.get('/:movieId/edit',(req, res)=>{
+  res.render('movie/edit')
+})
+
 export default movieControllerRouter;
