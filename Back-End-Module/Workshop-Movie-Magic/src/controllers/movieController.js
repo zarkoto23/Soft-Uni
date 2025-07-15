@@ -26,14 +26,14 @@ movieControllerRouter.post("/create", async (req, res) => {
 });
 
 movieControllerRouter.get("/:movieId/details", async (req, res) => {
-  console.log(req.user);
 
   const movieId = req.params.movieId;
   const movie = await movieService.getOneWithCasts(movieId);
 
   // const casts=castService.getAll(movie.casts)
+  const isCreator=movie.creator && movie.creator.toString()===req.user.id
 
-  res.render("movie/details", { movie });
+  res.render("movie/details", { movie,isCreator  });
 });
 
 movieControllerRouter.get("/:movieId/attach-cast", async (req, res) => {
@@ -41,7 +41,7 @@ movieControllerRouter.get("/:movieId/attach-cast", async (req, res) => {
   const movie = await movieService.getOne(movieId);
   const casts = await castService.getAll({ exclude: movie.casts });
 
-  res.render("movie/attach-cast", { movie, casts });
+  res.render("movie/attach-cast", { movie, casts});
 });
 
 movieControllerRouter.post("/:movieId/attach-cast", async (req, res) => {
