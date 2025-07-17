@@ -4,6 +4,7 @@ const userSchema = new Schema({
   email: {
     type: String,
     unique: true,
+    lowercase:true,
     match: /\@{a-zA-Z]+.[a-zA-Z]+$/,
     minLength: 10,
   },
@@ -11,6 +12,7 @@ const userSchema = new Schema({
     type: String,
     match: /^\w+$/,
     minLength: 6,
+    trim:true,
   },
 });
 
