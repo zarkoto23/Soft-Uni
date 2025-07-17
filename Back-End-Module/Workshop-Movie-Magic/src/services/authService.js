@@ -9,7 +9,17 @@ const SECRET=process.env.JWT_SECRET || 'BASICSECRET'
 
 export default{
 
-    register(userData){
+    async register(userData){
+
+        // if(userData.password!==userData.rePassword){
+        //     throw new Error('passwords dont match')
+        // }
+
+        const userCount=await User.countDocuments({email:userData.email})
+        if(userCount>0){
+            throw new Error ('email already exist!!')
+        }
+
         return User.create(userData)
         
     },
