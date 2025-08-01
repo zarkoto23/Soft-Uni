@@ -1,9 +1,22 @@
 import express from 'express'
+import mongoose from 'mongoose'
 import handlebars from 'express-handlebars'
 
 import routes from './routes.js'
 
 const app=express()
+
+//db setup
+try {
+    const uri='mongodb://localhost:27017/data'
+    await mongoose.connect(uri)
+    console.log('connect do DB SUCCESS');
+    
+} catch (error) {
+    console.log(error.message);
+    console.error('CANNOT connect to DB')
+    
+}
 
 //handlebars setup
 app.engine('hbs', handlebars.engine({

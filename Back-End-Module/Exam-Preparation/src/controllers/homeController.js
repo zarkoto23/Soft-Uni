@@ -1,11 +1,9 @@
 import { Router } from "express";
 
-const homeController=Router()
+const homeController = Router();
 
-homeController.get('/',(req, res)=>{
-    res.render('home')
-})
+homeController.get("/", (req, res) => {
+  res.render("home");
+});
 
-
-
-export default homeController
+export default homeController;
