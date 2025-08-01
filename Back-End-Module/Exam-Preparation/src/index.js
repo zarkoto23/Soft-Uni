@@ -1,6 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import handlebars from 'express-handlebars'
+import cookieParser from 'cookie-parser'
 
 import routes from './routes.js'
 
@@ -29,6 +30,7 @@ app.set('views','./src/views')
 //express setup
 app.use(express.static('src/public'))
 app.use(express.urlencoded({extended:false}))
+app.use(cookieParser())
 app.use(routes)
 
 

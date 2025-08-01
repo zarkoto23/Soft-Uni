@@ -1,19 +1,29 @@
 import { Router } from "express";
 import authService from "../services/authService.js";
 
+const authController = Router();
 
-const authController=Router()
-
-authController.get('/register', (req, res)=>{
-    res.render('auth/register')
+authController.get('/login',(req, res)=>{
+    res.render('auth/login')
 })
-authController.post('/register',(req, res)=>{
-    const userData=req.body
+authController.post('/login',(req ,res)=>{
+    const {email, password}=req.body
 
-     authService.register(userData)
-
-    res.redirect('/auth/login')
+    res.redirect('/')
     
 })
 
-export default authController
+
+
+authController.get("/register", (req, res) => {
+  res.render("auth/register");
+});
+authController.post("/register", (req, res) => {
+  const userData = req.body;
+
+  authService.register(userData);
+
+  res.redirect("/auth/login");
+});
+
+export default authController;
