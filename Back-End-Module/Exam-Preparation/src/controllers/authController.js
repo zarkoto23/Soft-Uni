@@ -12,11 +12,16 @@ authController.get("/login", (req, res) => {
 authController.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  const token = await authService.login(email, password);
-
-  res.cookie(AUTH_COOKIE_NAME, token);
+  try{
+    const token = await authService.login(email, password);
+      res.cookie(AUTH_COOKIE_NAME, token);
 
   res.redirect("/");
+  }catch(error){
+    res.render('auth/login',{error:getErrorMessage(error),user: {email}})
+
+  }
+
 });
 
 authController.get("/register", (req, res) => {
@@ -30,8 +35,8 @@ authController.post("/register", async (req, res) => {
     res.cookie(AUTH_COOKIE_NAME, token, { httpOnly: true });
     res.redirect("/");
   } catch (error) {
-    const err=getErrorMessage(error)
-    
+
+    res.render('auth/register',{error:getErrorMessage(error),user:userData})    
   }
 });
 
