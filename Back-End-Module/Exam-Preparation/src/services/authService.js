@@ -1,7 +1,10 @@
 import bcrypt from "bcrypt";
 import User from "../models/User.js";
-import jwt  from "jsonwebtoken";
-import { JWT_SECRET } from "../config.js";
+import { generateToken } from "../utils/authUtils.js";
+
+
+
+
 
 const register = async (userData) => {
   if (userData.password !== userData.confirmPassword) {
@@ -17,7 +20,12 @@ const register = async (userData) => {
     throw new Error("User already Exists!");
   }
 
-  return User.create(userData);
+  const createdUser=await User.create(userData);
+  
+  const token=generateToken(createdUser)
+
+  return token
+
 };
 
 
@@ -35,16 +43,13 @@ const login=async(email, password)=>{
     throw new Error('Invalid user ot MAIL')
    }
 
-   const payload={
-    id:user.id,
-    email:user.email,
-    username:user.username
-   }
-
-   const token =jwt.sign(payload,JWT_SECRET)
-
+   const token = generateToken(user)
    return token
+
 }
+
+
+
 
 
 
