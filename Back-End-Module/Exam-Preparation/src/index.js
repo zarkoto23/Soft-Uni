@@ -4,7 +4,7 @@ import handlebars from 'express-handlebars'
 import cookieParser from 'cookie-parser'
 
 import routes from './routes.js'
-
+import { auth } from './middlewares/authMiddleware.js'
 const app=express()
 
 //db setup
@@ -34,6 +34,7 @@ app.set('views','./src/views')
 app.use(express.static('src/public'))
 app.use(express.urlencoded({extended:false}))
 app.use(cookieParser())
+app.use(auth)
 app.use(routes)
 
 

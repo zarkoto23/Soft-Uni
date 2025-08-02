@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechStore - Laptops and Computers</title>
+    <title>{{#if pageTitle}}{{pageTitle}}{{else}}TechStore - Laptops and Computers{{/if}}</title>
     <link rel="stylesheet" href="/styles/styles.css">
 </head>
 
@@ -19,12 +19,15 @@
                     <li><a href="#">Catalog</a></li>
                     <li><a href="#">About</a></li>
                     {{!-- logged users --}}
+                    {{#if user}}
                     <li><a href="#">Profile</a></li>
                     <li><a href="#">Create Offer</a></li>
+                    <li><a href="/auth/logout">Logout</a></li>
                     {{!-- guests --}}
+                    {{else}}
                     <li><a href="/auth/login">Login</a></li>
                     <li><a href="/auth/register">Register</a></li>
-                    <li><a href="/auth/logout">Logout</a></li>
+                    {{/if}}
                 </ul>
             </nav>
         </div>
