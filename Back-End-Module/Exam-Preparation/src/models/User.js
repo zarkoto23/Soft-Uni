@@ -1,33 +1,25 @@
 import { Schema, model } from "mongoose";
-import bcrypt from 'bcrypt'
+import bcrypt from "bcrypt";
 
+const userSchema = new Schema({
+  email: {
+    type: String,
+    required: [true, "email is REQUIRED!"],
+  },
+  username: {
+    type: String,
+    required: [true, "username is REQUIRED!"],
+  },
+  password: {
+    type: String,
+    required: [true, "pass is REQUIRED!"],
+  },
+});
 
-const userSchema= new Schema({
+userSchema.pre("save", async function () {
+  this.password = await bcrypt.hash(this.password, 10);
+});
 
-    email:{
-        type:String,
-        required:true, 
-    },
-       username:{
-        type:String,
-        required:true, 
-    },
-       password:{
-        type:String,
-        required:true, 
-    },
-  
-})
+const User = model("User", userSchema);
 
-userSchema.pre('save', async function(){
-    this.password=await bcrypt.hash(this.password,10)
-})
-
-
-
-
-
-
-const User= model('User', userSchema)
-
-export default User
+export default User;
