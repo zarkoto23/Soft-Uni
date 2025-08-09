@@ -6,7 +6,7 @@ import { getErrorMessage } from "../utils/errorUtils.js";
 const authController = Router();
 
 authController.get("/login", (req, res) => {
-  res.render("auth/login");
+  res.render("auth/login",{pageTitle:'Login'});
 });
 authController.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -14,12 +14,12 @@ authController.post("/login", async (req, res) => {
   res.cookie("auth", token, { httpOnly: true });
   res.redirect("/");
   }catch(error){
-    res.render('auth/login',{error:getErrorMessage(error),user:{email}})
+    res.render('auth/login',{error:getErrorMessage(error),user:{email}},{pageTitle:'Login'})
   }
 });
 
 authController.get("/register", (req, res) => {
-  res.render("auth/register");
+  res.render("auth/register",{pageTitle:'Register'});
 });
 authController.post("/register", async (req, res) => {
   const userData = req.body;
@@ -28,7 +28,7 @@ authController.post("/register", async (req, res) => {
    res.cookie("auth", token, { httpOnly: true });
   res.redirect("/");
   }catch(error){
-    res.render('auth/register',{error:getErrorMessage(error),user:userData})    
+    res.render('auth/register',{error:getErrorMessage(error),user:userData},{pageTitle:'Register'})    
   }
 
  

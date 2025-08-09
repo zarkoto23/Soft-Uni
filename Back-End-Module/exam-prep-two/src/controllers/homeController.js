@@ -4,7 +4,7 @@ const homeController=Router()
 
 //routes setup
 homeController.get("/", (req, res) => {
-  res.render("home");
+  res.render("home",{pageTitle:"Home"});
 });
 
 
