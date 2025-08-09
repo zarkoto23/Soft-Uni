@@ -59,3 +59,8 @@ const deviceSchema = new Schema({
     }
     
 });
+
+const Device=model('Device', deviceSchema)
+
+
+export default Device
