@@ -1,15 +1,13 @@
-import jwt from 'jsonwebtoken'
-import { JWT_SECRET } from "../config.js"
+import jwt from "jsonwebtoken";
+import { JWT_SECRET } from "../config.js";
 
+export const generateToken = (user) => {
+  const payload = {
+    id: user._id,
+    email: user.email,
+    name: user.name,
+  };
+  const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "2h" });
 
-export const generateToken=(user)=>{
-    const payload={
-        id:user._id, 
-        email:user.email, 
-        username:user.username
-    }
-    const token=jwt.sign(payload, JWT_SECRET,{expiresIn:'2h'})
-
-    return token 
-
-}
+  return token;
+};

@@ -6,32 +6,39 @@ import { getErrorMessage } from "../utils/errorUtils.js";
 const authController = Router();
 
 authController.get("/login", (req, res) => {
-  res.render("auth/login",{pageTitle:'Login'});
+  res.render("auth/login", { pageTitle: "Login" });
 });
 authController.post("/login", async (req, res) => {
   const { email, password } = req.body;
-  try{const token = await authService.login(email, password);
-  res.cookie("auth", token, { httpOnly: true });
-  res.redirect("/");
-  }catch(error){
-    res.render('auth/login',{error:getErrorMessage(error),user:{email}},{pageTitle:'Login'})
+  try {
+    const token = await authService.login(email, password);
+    res.cookie("auth", token, { httpOnly: true });
+    res.redirect("/");
+  } catch (error) {
+    res.render(
+      "auth/login",
+      { error: getErrorMessage(error), user: { email } },
+      { pageTitle: "Login" }
+    );
   }
 });
 
 authController.get("/register", (req, res) => {
-  res.render("auth/register",{pageTitle:'Register'});
+  res.render("auth/register", { pageTitle: "Register" });
 });
 authController.post("/register", async (req, res) => {
   const userData = req.body;
-  try{
-  const token = await authService.register(userData);
-   res.cookie("auth", token, { httpOnly: true });
-  res.redirect("/");
-  }catch(error){
-    res.render('auth/register',{error:getErrorMessage(error),user:userData},{pageTitle:'Register'})    
+  try {
+    const token = await authService.register(userData);
+    res.cookie("auth", token, { httpOnly: true });
+    res.redirect("/");
+  } catch (error) {
+    res.render(
+      "auth/register",
+      { error: getErrorMessage(error), user: userData },
+      { pageTitle: "Register" }
+    );
   }
-
- 
 });
 
 authController.get("/logout", isAuth, (req, res) => {

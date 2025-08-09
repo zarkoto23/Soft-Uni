@@ -6,9 +6,9 @@ const userSchema = new Schema({
     type: String,
     required: [true, "mAil is required"],
   },
-  username: {
+  name: {
     type: String,
-    required: [true, "uSername is required"],
+    required: [true, "nAme is required"],
   },
   password: {
     type: String,
