@@ -1,10 +1,24 @@
 import Device from "../models/Device.js"
 
 
-export const create=(deviceData)=>{
-    Device.create(deviceData)
+ const getLatest=()=>{
+   return Device.find({}).sort({_id: "desc"}).limit(3)
 }
 
-export default deviceService={
-    create,
+
+
+ const create=(deviceData,userId)=>{
+    return Device.create({...deviceData,owner:userId})
 }
+
+
+
+
+
+
+ const deviceService={
+    create,
+    getLatest
+}
+
+export default deviceService
