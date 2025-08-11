@@ -25,3 +25,12 @@ export const isAuth = (req, res, next) => {
   }
   next();
 };
+
+
+export const isGuest=(req, res, next)=>{
+  if(req.user){
+     res.setError('you are already logged in1')
+     return res.redirect('/')
+  }
+  next()
+}
