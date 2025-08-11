@@ -36,5 +36,33 @@ try {
 })
 
 
+deviceController.get('/:deviceId/details', async(req, res)=>{
+    const deviceId=req.params.deviceId
+
+    const device=await deviceService.getOne(deviceId)
+    
+    const isOwner=device.owner.equals(req.user?.id)
+
+
+    res.render('devices/details',{device, isOwner})
+
+})
+
+
+deviceController.get('/:deviceId/prefer',isAuth, async(req, res)=>{
+    const userId=req.user.id
+    const deviceId=req.params.deviceId
+
+    try{
+    await deviceService.prefer(deviceId, userId)
+    res.redirect(`/devices/${deviceId}/details`)
+    }catch(error){
+        res.redirect('/404') //set error zamesti s tova
+    }
+
+
+
+})
+
 
 export default deviceController

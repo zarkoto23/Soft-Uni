@@ -4,14 +4,34 @@ import Device from "../models/Device.js"
  const getAll=()=>Device.find({})
 
 
+
+
  const getLatest=()=>{
    return Device.find({}).sort({_id: "desc"}).limit(3)
 }
 
 
+const getOne=(deviceId)=> Device.findById(deviceId)
+
 
  const create=(deviceData,userId)=>{
     return Device.create({...deviceData,owner:userId})
+}
+
+const prefer=async(deviceId, userId)=>{
+   const device=await Device.findById(deviceId)
+
+   if(device.owner.equals(userId)){
+      throw new Error('cannot prefer your own offer')
+   }
+
+   if(device.preferredList.includes(userId)){
+      throw new Error('you already preffer this offer')
+   }
+
+   device.preferredList.push(userId)
+   return device.save()
+
 }
 
 
@@ -22,7 +42,9 @@ import Device from "../models/Device.js"
  const deviceService={
     create,
     getLatest,
-    getAll
+    getAll,
+    getOne,
+    prefer
 }
 
 export default deviceService
