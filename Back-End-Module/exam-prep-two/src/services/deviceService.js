@@ -34,6 +34,15 @@ const prefer=async(deviceId, userId)=>{
 
 }
 
+const remove=async(deviceId,userId)=>{
+   const device=await getOne(deviceId)
+   if(!device.owner.equals(userId)){
+      throw new Error('only owner can delete this offer')
+   }
+
+   return Device.findByIdAndDelete(deviceId)
+
+}
 
 
 
@@ -44,7 +53,8 @@ const prefer=async(deviceId, userId)=>{
     getLatest,
     getAll,
     getOne,
-    prefer
+    prefer,
+    remove
 }
 
 export default deviceService

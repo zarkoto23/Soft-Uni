@@ -30,10 +30,13 @@
             <div class="product-actions">
                 {{#if isOwner}}
                 <button class="btn edit"><a href="">Edit</a></button>
-                <button class="btn delete"><a href="">Delete</a></button>
+                <button class="btn delete"><a href="/devices/{{device.id}}/delete">Delete</a></button>
                 {{else}}
-                <button class="btn prefer"><a href="/devices/{{deviceId}}/prefer">Prefer</a></button>
+                {{#unless isPrefered}}
+                <button class="btn prefer"><a href="/devices/{{device.id}}/prefer">Prefer</a></button>
+                {{else}}
                  <p class="prefer-message">You've already preferred this device</p>
+                {{/unless}}
                 {{/if}}
             </div>
                 {{/if}}

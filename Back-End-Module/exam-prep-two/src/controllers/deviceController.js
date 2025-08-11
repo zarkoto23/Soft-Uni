@@ -42,9 +42,12 @@ deviceController.get('/:deviceId/details', async(req, res)=>{
     const device=await deviceService.getOne(deviceId)
     
     const isOwner=device.owner.equals(req.user?.id)
+    const isPrefered=device.preferredList.includes(req.user?.id)
 
 
-    res.render('devices/details',{device, isOwner})
+
+
+    res.render('devices/details',{device, isOwner, isPrefered})
 
 })
 
@@ -52,17 +55,44 @@ deviceController.get('/:deviceId/details', async(req, res)=>{
 deviceController.get('/:deviceId/prefer',isAuth, async(req, res)=>{
     const userId=req.user.id
     const deviceId=req.params.deviceId
+    
 
     try{
     await deviceService.prefer(deviceId, userId)
     res.redirect(`/devices/${deviceId}/details`)
-    }catch(error){
-        res.redirect('/404') //set error zamesti s tova
-    }
 
+    }catch (error) {
+    const device = await deviceService.getOne(deviceId);
+    const isOwner = device.owner.equals(req.user?.id);
 
+    res.render('devices/details', {
+      device,
+      isOwner,
+      error: getErrorMessage(error),
+    });
+  }
+});
 
+deviceController.get('/:deviceId/delete', isAuth,async(req ,res)=>{
+    const deviceId=req.params.deviceId
+    const userId=req.user.id
+
+    try {
+        await deviceService.remove(deviceId, userId)
+        res.redirect('/devices')
+    } catch (error) {
+    const device = await deviceService.getOne(deviceId);
+    const isOwner = device.owner.equals(req.user?.id);
+
+    res.render('devices/details', {
+      device,
+      isOwner,
+      error: getErrorMessage(error),
+    });
+  }
 })
+
+
 
 
 export default deviceController

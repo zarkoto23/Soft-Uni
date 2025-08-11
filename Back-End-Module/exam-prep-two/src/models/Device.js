@@ -55,7 +55,8 @@ const deviceSchema = new Schema({
 }],
     owner:{
         type:Types.ObjectId,
-        ref:'User'
+        ref:'User',
+        required:true
     }
     
 });
