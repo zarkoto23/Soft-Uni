@@ -1,6 +1,9 @@
 import Device from "../models/Device.js"
 
 
+ const getAll=()=>Device.find({})
+
+
  const getLatest=()=>{
    return Device.find({}).sort({_id: "desc"}).limit(3)
 }
@@ -18,7 +21,8 @@ import Device from "../models/Device.js"
 
  const deviceService={
     create,
-    getLatest
+    getLatest,
+    getAll
 }
 
 export default deviceService
