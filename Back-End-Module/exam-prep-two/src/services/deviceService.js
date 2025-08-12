@@ -45,6 +45,17 @@ const remove=async(deviceId,userId)=>{
 }
 
 
+const update=async(deviceId, userId, deviceData)=>{
+     const device=await getOne(deviceId)
+   if(!device.owner.equals(userId)){
+      throw new Error('only owner can edit this offer')
+   }
+
+   return Device.findByIdAndUpdate(deviceId, deviceData)
+
+
+}
+
 
 
 
@@ -54,7 +65,8 @@ const remove=async(deviceId,userId)=>{
     getAll,
     getOne,
     prefer,
-    remove
+    remove,
+    update
 }
 
 export default deviceService

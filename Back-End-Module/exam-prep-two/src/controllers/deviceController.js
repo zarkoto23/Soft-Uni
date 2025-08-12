@@ -93,6 +93,40 @@ deviceController.get('/:deviceId/delete', isAuth,async(req ,res)=>{
 })
 
 
+deviceController.get('/:deviceId/edit',isAuth,async(req, res)=>{
+    const deviceId=req.params.deviceId
+    const device=await deviceService.getOne(deviceId)
+
+    if(!device.owner.equals(req.user.id)){
+      return res.render('devices/details', {
+      device,error: 'You are not authorized to edit this device.'
+    });
+    }
+
+    res.render('devices/edit',{device})
+})
+
+deviceController.post('/:deviceId/edit',isAuth,async(req, res)=>{
+    const deviceId=req.params.deviceId
+    const deviceData=req.body
+    const userId=req.user.id
+
+
+
+try {
+   await deviceService.update(deviceId, userId, deviceData)
+   return res.redirect(`/devices/${deviceId}/details`)
+} catch (error) {
+    res.render('devices/edit',{device:deviceData, error: getErrorMessage(error)})
+    
+}
+
+    
+})
+
+
+
+
 
 
 export default deviceController
