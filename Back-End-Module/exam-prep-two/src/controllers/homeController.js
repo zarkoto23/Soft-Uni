@@ -13,4 +13,8 @@ const lastDevices=await deviceService.getLatest()
   
 });
 
+homeController.get('/about',(req, res)=>{
+  res.render('about')
+})
+
 export default homeController;

@@ -51,7 +51,7 @@ const update=async(deviceId, userId, deviceData)=>{
       throw new Error('only owner can edit this offer')
    }
 
-   return Device.findByIdAndUpdate(deviceId, deviceData)
+   return Device.findByIdAndUpdate(deviceId, deviceData,{runValidators:true})
 
 
 }

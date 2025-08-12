@@ -1,67 +1,83 @@
 import { Schema, Types, model } from "mongoose";
 
 const deviceSchema = new Schema({
-  brand: { 
+  brand: {
     type: String,
-     required: true 
-    },
-  model: { 
+    required: true,
+    minLength: 2,
+  },
+  model: {
     type: String,
-     required: true 
-    },
-  hardDisk: { 
+    required: true,
+    minLength: 5,
+  },
+  hardDisk: {
     type: String,
-     required: true 
-    },
-  screenSize: { 
+    required: true,
+    minLength: 5,
+  },
+  screenSize: {
     type: String,
-     required: true 
-    },
-  ram: { 
+    required: true,
+    minLength: 1,
+  },
+  ram: {
     type: String,
-     required: true 
-    },
-  operatingSystem: { 
+    required: true,
+    minLength: 2,
+  },
+  operatingSystem: {
     type: String,
-     required: true 
-    },
-  cpu: { 
+    required: true,
+    minLength: 5,
+    maxLength: 20,
+  },
+  cpu: {
     type: String,
-     required: true 
-    },
-  gpu: { 
+    required: true,
+    minLength: 10,
+    maxLength: 50,
+  },
+  gpu: {
     type: String,
-     required: true 
-    },
-  price: { 
+    required: true,
+    minLength: 10,
+    maxLength: 50,
+  },
+  price: {
     type: Number,
-     required: true 
-    },
-  color: { 
+    required: true,
+    min: 0,
+  },
+  color: {
     type: String,
-     required: true 
-    },
-  weight: { 
+    required: true,
+    minLength: 2,
+    maxLength: 10,
+  },
+  weight: {
     type: String,
-     required: true 
-    },
-  image: { 
+    required: true,
+    minLength: 1,
+  },
+  image: {
     type: String,
-     required: true 
+    required: true,
+    match: /^https?:\/\//,
+  },
+  preferredList: [
+    {
+      type: Types.ObjectId,
+      ref: "User",
     },
-    preferredList:[{
-         type:Types.ObjectId, 
-         ref:'User'
-}],
-    owner:{
-        type:Types.ObjectId,
-        ref:'User',
-        required:true
-    }
-    
+  ],
+  owner: {
+    type: Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 });
 
-const Device=model('Device', deviceSchema)
+const Device = model("Device", deviceSchema);
 
-
-export default Device
+export default Device;
