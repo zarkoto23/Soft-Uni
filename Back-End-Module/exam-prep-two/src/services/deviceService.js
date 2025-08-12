@@ -1,72 +1,72 @@
-import Device from "../models/Device.js"
+import Device from "../models/Device.js";
 
+const getAll = (filter = {}) => {
+  let query = Device.find({});
 
- const getAll=()=>Device.find({})
+  if (filter.owner) {
+    query = query.find({ owner: filter.owner });
+  }
 
+  if (filter.preferedBy) {
+    query = query.find({ preferredList: filter.preferedBy });
+  }
 
+  return query;
+};
 
+const getLatest = () => {
+  return Device.find({}).sort({ _id: "desc" }).limit(3);
+};
 
- const getLatest=()=>{
-   return Device.find({}).sort({_id: "desc"}).limit(3)
-}
+const getOne = (deviceId) => Device.findById(deviceId);
 
+const create = (deviceData, userId) => {
+  return Device.create({ ...deviceData, owner: userId });
+};
 
-const getOne=(deviceId)=> Device.findById(deviceId)
+const prefer = async (deviceId, userId) => {
+  const device = await Device.findById(deviceId);
 
+  if (device.owner.equals(userId)) {
+    throw new Error("cannot prefer your own offer");
+  }
 
- const create=(deviceData,userId)=>{
-    return Device.create({...deviceData,owner:userId})
-}
+  if (device.preferredList.includes(userId)) {
+    throw new Error("you already preffer this offer");
+  }
 
-const prefer=async(deviceId, userId)=>{
-   const device=await Device.findById(deviceId)
+  device.preferredList.push(userId);
+  return device.save();
+};
 
-   if(device.owner.equals(userId)){
-      throw new Error('cannot prefer your own offer')
-   }
+const remove = async (deviceId, userId) => {
+  const device = await getOne(deviceId);
+  if (!device.owner.equals(userId)) {
+    throw new Error("only owner can delete this offer");
+  }
 
-   if(device.preferredList.includes(userId)){
-      throw new Error('you already preffer this offer')
-   }
+  return Device.findByIdAndDelete(deviceId);
+};
 
-   device.preferredList.push(userId)
-   return device.save()
+const update = async (deviceId, userId, deviceData) => {
+  const device = await getOne(deviceId);
+  if (!device.owner.equals(userId)) {
+    throw new Error("only owner can edit this offer");
+  }
 
-}
+  return Device.findByIdAndUpdate(deviceId, deviceData, {
+    runValidators: true,
+  });
+};
 
-const remove=async(deviceId,userId)=>{
-   const device=await getOne(deviceId)
-   if(!device.owner.equals(userId)){
-      throw new Error('only owner can delete this offer')
-   }
+const deviceService = {
+  create,
+  getLatest,
+  getAll,
+  getOne,
+  prefer,
+  remove,
+  update,
+};
 
-   return Device.findByIdAndDelete(deviceId)
-
-}
-
-
-const update=async(deviceId, userId, deviceData)=>{
-     const device=await getOne(deviceId)
-   if(!device.owner.equals(userId)){
-      throw new Error('only owner can edit this offer')
-   }
-
-   return Device.findByIdAndUpdate(deviceId, deviceData,{runValidators:true})
-
-
-}
-
-
-
-
- const deviceService={
-    create,
-    getLatest,
-    getAll,
-    getOne,
-    prefer,
-    remove,
-    update
-}
-
-export default deviceService
+export default deviceService;
