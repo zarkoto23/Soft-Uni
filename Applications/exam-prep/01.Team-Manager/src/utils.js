@@ -1,22 +1,22 @@
 
 
 
-function getToken() {
+export function getToken() {
   return localStorage.getItem("token");
 }
 
-function getUserId() {
+export function getUserId() {
   return localStorage.getItem("userId");
 }
 
-function setUser(userData) {
+export function setUser(userData) {
   localStorage.setItem("token", userData.accessToken);
   localStorage.setItem("userId", userData._id);
   localStorage.setItem("email", userData.email);
 }
 
 
-function removeUser(){
+export function removeUser(){
     localStorage.removeItem('token')
     localStorage.removeItem('userId')
     localStorage.removeItem('email')
